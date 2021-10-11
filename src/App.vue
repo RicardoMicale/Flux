@@ -6,11 +6,20 @@
   <router-view />
 </template>
 
-<style>
+<style lang="scss">
+/*Fuente*/
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap");
+$fonts: "Lexend", Helvetica;
+
+//Paleta
+$acento: #f44b12;
+$bg-dark: #2b282a;
+$bg-secundario: #403b3e;
+$bg-light: #f2f2f2;
+$bg-light-secundario: #ffffff;
 
 #app {
-  font-family: "Lexend", Helvetica, Arial, sans-serif;
+  font-family: $fonts;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
