@@ -14,6 +14,15 @@ const db = app.firestore();
 
 const coleccionMaterias = db.collection('Materias');
 
+export const getAllMaterias = async () => {
+    const snapshot = await coleccionMaterias.get();
+    const materias = [];
+    snapshot.forEach(doc => {
+        materias.push(doc)
+    });
+    return materias
+}
+
 export const getMateria = async id => {
     const materia = await coleccionMaterias.doc(id).get();
     return materia
