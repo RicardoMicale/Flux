@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "firebase": "^9.1.2",
+    "firebase-tools": "^9.20.0",
     "node-sass": "^6.0.1",
     "sass-loader": "^10",
     "scss": "^0.2.4",
