@@ -1,29 +1,35 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/flujograma">About</router-link>
-  </div>
+  <Navbar />
   <router-view />
 </template>
+<script>
+import Navbar from "./components/Navbar.vue";
 
+export default {
+  name: "App",
+  components: {
+    Navbar,
+  },
+};
+</script>
 <style lang="scss">
-/*Fuente*/
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap");
-$fonts: "Lexend", Helvetica;
+@import "./variabes.scss";
 
-//Paleta
-$acento: #f44b12;
-$bg-dark: #2b282a;
-$bg-secundario: #403b3e;
-$bg-light: #f2f2f2;
-$bg-light-secundario: #ffffff;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $bg-dark;
+  height: 100vh;
+}
 
 #app {
   font-family: $fonts;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
 #nav {
