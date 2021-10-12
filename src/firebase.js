@@ -18,7 +18,7 @@ export const getAllMaterias = async () => {
     const snapshot = await coleccionMaterias.get();
     const materias = [];
     snapshot.forEach(doc => {
-        materias.push(doc)
+        materias.push(doc.data())
     });
     return materias
 }
