@@ -13,6 +13,9 @@
         <router-link to="/flujograma" class="link"> Flujograma </router-link>
       </li>
       <li>
+        <router-link to="/perfil" class="link"> Perfil </router-link>
+      </li>
+      <li>
         <button class="login">Iniciar sesion</button>
       </li>
     </ul>
@@ -124,6 +127,12 @@ export default {
     color: $font;
     font-size: 1rem;
     cursor: pointer;
+    transition: all 0.2s;
+
+    &:active {
+      background-color: #b63a11;
+      color: #e2e2e2;
+    }
   }
 }
 </style>
