@@ -7,12 +7,16 @@ const config = {
     storageBucket: "fluxunimet.appspot.com",
     messagingSenderId: "591629630343",
     appId: "1:591629630343:web:54403dae4049d02d953122"
-  };
+};
 
 const app = firebase.initializeApp(config);
 const db = app.firestore();
 
 const coleccionMaterias = db.collection('Materias');
+
+export const crearMateria = (id, materia) => {
+    return coleccionMaterias.doc(id).set(materia);
+}
 
 export const getAllMaterias = async () => {
     const snapshot = await coleccionMaterias.get();
