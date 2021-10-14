@@ -80,6 +80,7 @@ export default {
         this.descripcion
       );
       fb.crearMateria(id, materia);
+      this.prelatorias.length = 0;
     },
     aggPrel() {
       this.prelatorias.push(this.prelatoria);
