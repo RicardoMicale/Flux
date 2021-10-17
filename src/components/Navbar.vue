@@ -16,7 +16,7 @@
         <router-link to="/perfil" class="link"> Perfil </router-link>
       </li>
       <li>
-        <button class="login">Iniciar sesion</button>
+        <button class="login" @click="login()">Iniciar sesion</button>
       </li>
     </ul>
   </header>
@@ -25,6 +25,11 @@
 <script>
 export default {
   name: "Navbar",
+  methods: {
+    login() {
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
 

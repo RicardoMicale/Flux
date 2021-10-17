@@ -1,104 +1,90 @@
 <template>
-  <form @submit.prevent="aggMateria()">
-    Agregar materias
-
-    <label for="codigo">codigo</label>
-    <input type="text" name="" id="codigo" v-model="codigo" />
-    <label for="nombre">nombre</label>
-    <input type="text" name="" id="nombre" v-model="nombre" />
-    <label for="creditosPrelatorios">creditosPrelatorios</label>
-    <input
-      type="number"
-      name=""
-      id="creditosPrelatorios"
-      v-model="creditosPrelatorios"
-    />
-    <label for="creditosBP">creditosBP</label>
-    <input type="number" name="" id="creditosBP" v-model="creditosBP" />
-    <label for="prelatorias">prelatorias</label>
-    <input type="text" name="" id="prelatorias" v-model="prelatoria" />
-    <button @click="aggPrel()">Agregar</button>
-    <label for="trimestre">trimestre</label>
-    <input type="number" name="" id="trimestre" v-model="trimestre" />
-    <input type="submit" />
-  </form>
+  <div>Flujograma</div>
+  <div class="flujograma">
+    <div
+      class="contenedor-materias"
+      v-for="trimestre in trimestres"
+      :key="trimestre.id"
+    >
+      <Trimestre :trimestre="trimestre.materias" />
+    </div>
+  </div>
 </template>
 
 <script>
 import * as fb from "../firebase.js";
+import Trimestre from "../components/Trimestre.vue";
 
 export default {
   name: "Flujograma",
+  components: {
+    Trimestre,
+  },
   data() {
+    const trimestres = [];
     return {
-      codigo: "",
-      nombre: "",
-      creditosPrelatorios: 0,
-      creditosBp: 0,
-      prelatorias: [],
-      trimestre: 0,
-      discusion: "Por definir",
-      descripcion: "Por definir tambien",
-      prelatoria: "",
+      trimestres,
     };
   },
   methods: {
-    crearMaterias(
-      codigo,
-      nombre,
-      creditosPrelatorios,
-      creditosBp,
-      prelatorias,
-      trimestre,
-      discusion,
-      descripcion
-    ) {
-      const materia = {
-        codigo: codigo,
-        nombre: nombre,
-        creditosPrelatorios: creditosPrelatorios,
-        creditosBp: creditosBp,
-        prelatorias: prelatorias,
-        trimestre: trimestre,
-        discusion: discusion,
-        descripcion: descripcion,
-      };
+    async getMaterias() {
+      let materias = [];
 
-      return materia;
-    },
-    aggMateria() {
-      const id = this.codigo;
+      await fb.getAllMaterias().then((res) => {
+        materias = [...res];
+      });
 
-      const materia = this.crearMaterias(
-        this.codigo,
-        this.nombre,
-        this.creditosPrelatorios,
-        this.creditosBp,
-        this.prelatorias,
-        this.trimestre,
-        this.discusion,
-        this.descripcion
-      );
-      fb.crearMateria(id, materia);
+      const trimestre1 = this.filtroMaterias(materias, 1);
+      const trimestre2 = this.filtroMaterias(materias, 2);
+      const trimestre3 = this.filtroMaterias(materias, 3);
+      const trimestre4 = this.filtroMaterias(materias, 4);
+      const trimestre5 = this.filtroMaterias(materias, 5);
+      const trimestre6 = this.filtroMaterias(materias, 6);
+      const trimestre7 = this.filtroMaterias(materias, 7);
+      const trimestre8 = this.filtroMaterias(materias, 8);
+      const trimestre9 = this.filtroMaterias(materias, 9);
+      const trimestre10 = this.filtroMaterias(materias, 10);
+      const trimestre11 = this.filtroMaterias(materias, 11);
+      const trimestre12 = this.filtroMaterias(materias, 12);
+
+      const flujograma = [
+        { materias: trimestre1, id: 1 },
+        { materias: trimestre2, id: 2 },
+        { materias: trimestre3, id: 3 },
+        { materias: trimestre4, id: 4 },
+        { materias: trimestre5, id: 5 },
+        { materias: trimestre6, id: 6 },
+        { materias: trimestre7, id: 7 },
+        { materias: trimestre8, id: 8 },
+        { materias: trimestre9, id: 9 },
+        { materias: trimestre10, id: 10 },
+        { materias: trimestre11, id: 11 },
+        { materias: trimestre12, id: 12 },
+      ];
+      console.log(flujograma);
+
+      return flujograma;
     },
-    aggPrel() {
-      this.prelatorias.push(this.prelatoria);
+    filtroMaterias(todasLasMaterias, noTrim) {
+      let trimestre = todasLasMaterias.filter((materia) => {
+        return materia.trimestre === noTrim;
+      });
+
+      return trimestre;
     },
+  },
+  mounted() {
+    this.getMaterias().then((res) => {
+      this.trimestres = res;
+    });
   },
 };
 </script>
 
 <style scoped lang='scss'>
-form {
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-}
+@import "../variabes.scss";
 
-input {
-  height: 30px;
-}
-label {
-  color: white;
+.flujograma {
+  height: 100vh;
 }
 </style>
