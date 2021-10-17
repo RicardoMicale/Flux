@@ -1,7 +1,9 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Landing from '../views/Landing.vue'
+import { createRouter, createWebHashHistory } from 'vue-router';
+import Landing from '../views/Landing.vue';
 import Flujograma from '../views/Flujograma.vue';
-import Acerca from '../views/Acerca.vue'
+import Acerca from '../views/Acerca.vue';
+import Agregar from '../views/Agregar.vue';
+import Materia from '../views/Materia.vue';
 
 const routes = [
   {
@@ -18,6 +20,16 @@ const routes = [
     path: '/acerca',
     name: 'Acerca',
     component: Acerca
+  },
+  {
+    path: '/agregar',
+    name: 'Agregar',
+    component: Agregar
+  },
+  {
+    path: '/materias/:id',
+    name: 'Materia',
+    component: Materia
   }
 ]
 
