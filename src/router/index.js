@@ -4,6 +4,8 @@ import Flujograma from '../views/Flujograma.vue';
 import Acerca from '../views/Acerca.vue';
 import Agregar from '../views/Agregar.vue';
 import Materia from '../views/Materia.vue';
+import Login from '../views/Login.vue';
+import Perfil from '../views/Perfil.vue';
 
 const routes = [
   {
@@ -30,6 +32,16 @@ const routes = [
     path: '/materias/:id',
     name: 'Materia',
     component: Materia
+  },
+  {
+    path: '/perfil',
+    name: 'Perfil',
+    component: Perfil
+  },
+  {
+    path: '/login',
+    name: "Login",
+    component: Login
   }
 ]
 
