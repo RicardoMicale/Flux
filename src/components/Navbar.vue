@@ -13,10 +13,14 @@
         <router-link to="/flujograma" class="link"> Flujograma </router-link>
       </li>
       <li>
-        <router-link to="/perfil" class="link"> Perfil </router-link>
+        <router-link to="/perfil" class="link logged_in"> Perfil </router-link>
       </li>
       <li>
-        <button class="login" @click="login()">Iniciar sesion</button>
+        <button class="btn_main logged_out" @click="login()">Iniciar sesión</button>
+      </li>
+      <li>
+        <!-- TODO: Hacer que el boton refresque la página y vaya a inicio -->
+        <button class="btn_main logged_in" @click="logout()">Cerrar sesión</button>
       </li>
     </ul>
   </header>
@@ -41,6 +45,12 @@ export default {
       });
       // this.$router.push("/login");
     },
+    logout(){
+      firebase.auth().signOut().then(() => {
+        console.log("Sesión cerrada.");
+        });
+    },
+    
   },
 };
 </script>
@@ -134,7 +144,7 @@ export default {
     }
   }
 
-  .login {
+  .btn_main {
     background-color: $acento;
     padding: 0.5rem 1rem;
     border-radius: 0.4rem;
@@ -151,5 +161,6 @@ export default {
       color: #e2e2e2;
     }
   }
+
 }
 </style>
