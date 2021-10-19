@@ -1,8 +1,9 @@
 <template>
-  <div v-for="materia in trimestre" :key="materia.codigo">
-    <router-link :to="'/materia/' + materia.codigo" class="link-materia">
+  <div class="trimestre">
+    <p>{{ index + 1 }}</p>
+    <div v-for="materia in trimestre" :key="materia.codigo">
       <Caja :codigo="materia.codigo" :nombre="materia.nombre" />
-    </router-link>
+    </div>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
   },
   props: {
     trimestre: Array,
+    index: Number,
   },
 };
 </script>
@@ -23,8 +25,16 @@ export default {
 <style lang="scss" scoped>
 @import "../variabes.scss";
 
-.link-materia {
-  text-decoration: none;
+.trimestre {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 1rem;
+}
+
+p {
   color: $font;
 }
 </style>
