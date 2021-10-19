@@ -12,6 +12,9 @@
 </template>
 
 <script>
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 import * as fb from "../firebase.js";
 import Trimestre from "../components/Trimestre.vue";
 
@@ -22,30 +25,32 @@ export default {
   },
   data() {
     const trimestres = [];
+    const materias = [];
     return {
       trimestres,
+      materias,
     };
   },
   methods: {
     async getMaterias() {
-      let materias = [];
-
       await fb.getAllMaterias().then((res) => {
-        materias = [...res];
+        this.materias = [...res];
       });
 
-      const trimestre1 = this.filtroMaterias(materias, 1);
-      const trimestre2 = this.filtroMaterias(materias, 2);
-      const trimestre3 = this.filtroMaterias(materias, 3);
-      const trimestre4 = this.filtroMaterias(materias, 4);
-      const trimestre5 = this.filtroMaterias(materias, 5);
-      const trimestre6 = this.filtroMaterias(materias, 6);
-      const trimestre7 = this.filtroMaterias(materias, 7);
-      const trimestre8 = this.filtroMaterias(materias, 8);
-      const trimestre9 = this.filtroMaterias(materias, 9);
-      const trimestre10 = this.filtroMaterias(materias, 10);
-      const trimestre11 = this.filtroMaterias(materias, 11);
-      const trimestre12 = this.filtroMaterias(materias, 12);
+      this.pasadasEstudiante();
+
+      const trimestre1 = this.filtroMaterias(this.materias, 1);
+      const trimestre2 = this.filtroMaterias(this.materias, 2);
+      const trimestre3 = this.filtroMaterias(this.materias, 3);
+      const trimestre4 = this.filtroMaterias(this.materias, 4);
+      const trimestre5 = this.filtroMaterias(this.materias, 5);
+      const trimestre6 = this.filtroMaterias(this.materias, 6);
+      const trimestre7 = this.filtroMaterias(this.materias, 7);
+      const trimestre8 = this.filtroMaterias(this.materias, 8);
+      const trimestre9 = this.filtroMaterias(this.materias, 9);
+      const trimestre10 = this.filtroMaterias(this.materias, 10);
+      const trimestre11 = this.filtroMaterias(this.materias, 11);
+      const trimestre12 = this.filtroMaterias(this.materias, 12);
 
       const flujograma = [
         { materias: trimestre1, id: 1 },
@@ -61,7 +66,6 @@ export default {
         { materias: trimestre11, id: 11 },
         { materias: trimestre12, id: 12 },
       ];
-      console.log(flujograma);
 
       return flujograma;
     },
@@ -71,6 +75,24 @@ export default {
       });
 
       return trimestre;
+    },
+    async pasadasEstudiante() {
+      if (!firebase.auth().currentUser) {
+        return;
+      }
+      const idActual = firebase.auth().currentUser.uid;
+      let user;
+
+      await fb.getUsuario(idActual).then((res) => {
+        user = res.data();
+        this.materias.forEach((materia) => {
+          if (user.materiasCursadas.includes(materia.codigo)) {
+            materia.pasada = true;
+          } else {
+            materia.pasada = false;
+          }
+        });
+      });
     },
   },
   mounted() {

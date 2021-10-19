@@ -2,7 +2,11 @@
   <div class="trimestre">
     <p>{{ index + 1 }}</p>
     <div v-for="materia in trimestre" :key="materia.codigo">
-      <Caja :codigo="materia.codigo" :nombre="materia.nombre" />
+      <Caja
+        :codigo="materia.codigo"
+        :nombre="materia.nombre"
+        :pasada="materia.pasada"
+      />
     </div>
   </div>
 </template>
