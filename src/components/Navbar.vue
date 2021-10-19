@@ -48,7 +48,7 @@ export default {
     this.loggeado = firebase.auth().currentUser || false;
   },
   methods: {
-    //TODO: mover metodos login a pagina login
+    //TODO: mover metodos login a pagina login y dejar router push en metodo login del navbar
     login() {
       let provider = new firebase.auth.GoogleAuthProvider();
       firebase
@@ -74,6 +74,7 @@ export default {
           console.log("Sesión cerrada.");
           console.log(firebase.auth().currentUser);
           this.loggeado = !this.loggeado;
+          this.$router.push("/");
         });
     },
   },
