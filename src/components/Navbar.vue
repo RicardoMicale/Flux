@@ -48,6 +48,7 @@ export default {
     this.loggeado = firebase.auth().currentUser || false;
   },
   methods: {
+    //TODO: mover metodos login a pagina login
     login() {
       let provider = new firebase.auth.GoogleAuthProvider();
       firebase
