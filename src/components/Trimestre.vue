@@ -36,5 +36,6 @@ export default {
 
 p {
   color: $font;
+  width: 1rem;
 }
 </style>

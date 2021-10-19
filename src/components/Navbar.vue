@@ -13,18 +13,30 @@
         <router-link to="/flujograma" class="link"> Flujograma </router-link>
       </li>
       <li>
-        <router-link to="/perfil" class="link logged_in" v-if="loggeado">
+        <router-link
+          to="/perfil"
+          class="link logged_in"
+          :class="!loggeado ? 'esconder' : ''"
+        >
           Perfil
         </router-link>
       </li>
       <li>
-        <button class="btn_main" @click="login()" v-if="!loggeado">
+        <button
+          class="btn_main"
+          @click="login()"
+          :class="loggeado ? 'esconder' : ''"
+        >
           Iniciar sesión
         </button>
       </li>
       <li>
         <!-- TODO: Hacer que el boton refresque la página y vaya a inicio -->
-        <button class="btn_main logged_in" @click="logout()" v-if="loggeado">
+        <button
+          class="btn_main"
+          @click="logout()"
+          :class="!loggeado ? 'esconder' : ''"
+        >
           Cerrar sesión
         </button>
       </li>
@@ -36,6 +48,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import * as fb from "../firebase";
 
 export default {
   name: "Navbar",
@@ -55,16 +68,34 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then((result) => {
-          let token = result.credential.accessToken;
-          let user = result.user;
-          console.log(token);
-          console.log(user);
+          const user = result.user;
+          const id = user.uid;
+          fb.getUsuario(id).then((res) => {
+            if (!res.exists) {
+              const usuario = this.nuevoUsuario(user.displayName);
+              fb.crearUsuario(id, usuario);
+            }
+          });
           this.loggeado = !this.loggeado;
         })
         .catch((err) => {
           console.log(err);
         });
       // this.$router.push("/login");
+    },
+    nuevoUsuario(nombre) {
+      const user = {
+        nombre: nombre,
+        carrera: "Ingenieria de sistemas",
+        creditosTot: 0,
+        creditosBP: 0,
+        creditosFaltantes: 180,
+        trimestreActual: [],
+        materiasCursadas: [],
+        materiasDisponibles: [],
+      };
+
+      return user;
     },
     logout() {
       firebase
@@ -104,6 +135,10 @@ export default {
     right: 0;
     margin: 0 auto;
   }
+}
+
+.esconder {
+  display: none;
 }
 
 .link,
