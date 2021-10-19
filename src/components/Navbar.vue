@@ -13,10 +13,10 @@
         <router-link to="/flujograma" class="link"> Flujograma </router-link>
       </li>
       <li>
-        <router-link to="/perfil" class="link logged_in"> Perfil </router-link>
+        <router-link to="/perfil" class="link logged_in" v-if="logged_in"> Perfil </router-link>
       </li>
-      <li>
-        <button class="btn_main logged_out" @click="login()">Iniciar sesión</button>
+      <li >
+        <button class="btn_main " @click="login()">Iniciar sesión</button>
       </li>
       <li>
         <!-- TODO: Hacer que el boton refresque la página y vaya a inicio -->
@@ -33,6 +33,9 @@ import 'firebase/compat/firestore';
 export default {
   name: "Navbar",
   methods: {
+    created () { 
+      this.user = firebase.auth().currentUser || false;
+    },
     login() {
       let provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then((result) => {
@@ -48,9 +51,19 @@ export default {
     logout(){
       firebase.auth().signOut().then(() => {
         console.log("Sesión cerrada.");
+        console.log(firebase.auth().currentUser)
         });
     },
-    
+    //TODO: Borrar elementos de navbar
+    logged_in(){
+      firebase.auth().onAuthStateChanged(function(user) {
+      if (user === null) {
+        return false
+      } else {
+      return true
+    }
+});
+    },
   },
 };
 </script>
