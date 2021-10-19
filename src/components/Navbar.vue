@@ -13,56 +13,67 @@
         <router-link to="/flujograma" class="link"> Flujograma </router-link>
       </li>
       <li>
-        <router-link to="/perfil" class="link logged_in" v-if="logged_in"> Perfil </router-link>
+        <router-link to="/perfil" class="link logged_in" v-if="loggeado">
+          Perfil
+        </router-link>
       </li>
-      <li >
-        <button class="btn_main " @click="login()">Iniciar sesión</button>
+      <li>
+        <button class="btn_main" @click="login()" v-if="!loggeado">
+          Iniciar sesión
+        </button>
       </li>
       <li>
         <!-- TODO: Hacer que el boton refresque la página y vaya a inicio -->
-        <button class="btn_main logged_in" @click="logout()">Cerrar sesión</button>
+        <button class="btn_main logged_in" @click="logout()" v-if="loggeado">
+          Cerrar sesión
+        </button>
       </li>
     </ul>
   </header>
 </template>
 
 <script>
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+
 export default {
   name: "Navbar",
+  data() {
+    return {
+      loggeado: false,
+    };
+  },
+  created() {
+    this.loggeado = firebase.auth().currentUser || false;
+  },
   methods: {
-    created () { 
-      this.user = firebase.auth().currentUser || false;
-    },
     login() {
       let provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithPopup(provider).then((result) => {
-        let token = result.credential.accessToken;
-        let user = result.user;
-          console.log(token) 
-          console.log(user)     
-      }).catch((err) => {
-        console.log(err);
-      });
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          let token = result.credential.accessToken;
+          let user = result.user;
+          console.log(token);
+          console.log(user);
+          this.loggeado = !this.loggeado;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       // this.$router.push("/login");
     },
-    logout(){
-      firebase.auth().signOut().then(() => {
-        console.log("Sesión cerrada.");
-        console.log(firebase.auth().currentUser)
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          console.log("Sesión cerrada.");
+          console.log(firebase.auth().currentUser);
+          this.loggeado = !this.loggeado;
         });
-    },
-    //TODO: Borrar elementos de navbar
-    logged_in(){
-      firebase.auth().onAuthStateChanged(function(user) {
-      if (user === null) {
-        return false
-      } else {
-      return true
-    }
-});
     },
   },
 };
@@ -174,6 +185,5 @@ export default {
       color: #e2e2e2;
     }
   }
-
 }
 </style>

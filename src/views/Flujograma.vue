@@ -1,12 +1,12 @@
 <template>
-  <div>Flujograma</div>
+  <h2>Flujograma</h2>
   <div class="flujograma">
     <div
       class="contenedor-materias"
-      v-for="trimestre in trimestres"
+      v-for="(trimestre, index) in trimestres"
       :key="trimestre.id"
     >
-      <Trimestre :trimestre="trimestre.materias" />
+      <Trimestre :trimestre="trimestre.materias" :index="index" />
     </div>
   </div>
 </template>
@@ -84,7 +84,21 @@ export default {
 <style scoped lang='scss'>
 @import "../variabes.scss";
 
+h2 {
+  color: $font;
+  padding: 2rem 3rem 1rem;
+}
+
 .flujograma {
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0.5rem 2rem;
+}
+
+.contenedor-materias {
+  width: 100%;
 }
 </style>
