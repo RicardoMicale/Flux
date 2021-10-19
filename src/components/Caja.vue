@@ -104,6 +104,6 @@ export default {
 }
 
 .pasada {
-  color: green;
+  color: rgb(45, 216, 45);
 }
 </style>
