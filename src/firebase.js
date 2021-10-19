@@ -17,7 +17,9 @@ const app = firebase.initializeApp(config);
 const db = app.firestore();
 
 const coleccionMaterias = db.collection('Materias');
+const coleccionUsuarios = db.collection('Usuarios');
 
+//CRUD materias
 export const crearMateria = (id, materia) => {
     return coleccionMaterias.doc(id).set(materia);
 }
@@ -34,6 +36,20 @@ export const getAllMaterias = async () => {
 export const getMateria = async id => {
     const materia = await coleccionMaterias.doc(id).get();
     return materia
+}
+
+//CRUD usuarios
+export const crearUsuario = (id, usuario) => {
+    return coleccionUsuarios.doc(id).set(usuario);
+}
+
+export const getUsuario = async id => {
+    const user = await coleccionUsuarios.doc(id).get();
+    return user;
+}
+
+export const updateUser = (id, user) => {
+    return coleccionUsuarios.doc(id).update(user)
 }
 
 export default app;
