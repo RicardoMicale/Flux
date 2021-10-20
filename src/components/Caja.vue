@@ -1,5 +1,5 @@
 <template>
-  <div class="contenido">
+  <div class="contenido" :class="pasada ? 'materia-pasada' : ''">
     <router-link :to="'/materia/' + codigo" class="link-materia">
       <div class="informacion">
         <h3>{{ nombre }}</h3>
@@ -104,6 +104,10 @@ export default {
 }
 
 .pasada {
-  color: rgb(45, 216, 45);
+  color: $materia-pasada;
+}
+
+.materia-pasada {
+  opacity: 0.7;
 }
 </style>
