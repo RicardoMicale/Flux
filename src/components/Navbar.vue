@@ -72,7 +72,7 @@ export default {
           const id = user.uid;
           fb.getUsuario(id).then((res) => {
             if (!res.exists) {
-              const usuario = this.nuevoUsuario(user.displayName);
+              const usuario = this.nuevoUsuario(user.displayName, user.email);
               fb.crearUsuario(id, usuario);
             }
           });
@@ -83,10 +83,11 @@ export default {
         });
       // this.$router.push("/login");
     },
-    nuevoUsuario(nombre) {
+    nuevoUsuario(nombre, email) {
       const user = {
         nombre: nombre,
         carrera: "Ingenieria de sistemas",
+        email: email,
         creditosTot: 0,
         creditosBP: 0,
         creditosFaltantes: 180,
