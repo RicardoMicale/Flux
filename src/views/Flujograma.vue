@@ -1,6 +1,22 @@
 <template>
   <h2>Flujograma</h2>
   <div class="flujograma">
+    <!-- <section class="info-carrera"> -->
+        <p>
+          Cantidad total de creditos acumulados:
+          <span>{{ user.creditosTot }}</span>
+        </p>
+        <p>
+          Cantidad de creditos en materias BP:
+          <span>{{ user.creditosBP }}</span>
+        </p>
+        <p>
+          Cantiadad de creditos faltantes pir cursar:
+          <span>
+            {{ user.creditosFaltantes }}
+          </span>
+        </p>
+      <!-- </section> -->
     <div
       class="contenedor-materias"
       v-for="(trimestre, index) in trimestres"
@@ -29,6 +45,7 @@ export default {
     return {
       trimestres,
       materias,
+      user: {},
     };
   },
   methods: {
@@ -99,6 +116,25 @@ export default {
     this.getMaterias().then((res) => {
       this.trimestres = res;
     });
+  },
+  created() {
+    let user;
+
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        await fb
+          .getUsuario(user.uid)
+          .then((response) => {
+            this.user = response.data();
+          })
+          .catch((err) => console.log(err));
+      } else {
+        this.$router.push("/");
+      }
+    });
+    return {
+      user,
+    };
   },
 };
 </script>
