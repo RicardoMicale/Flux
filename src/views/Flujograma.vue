@@ -1,7 +1,7 @@
 <template>
   <h2>Flujograma</h2>
   <div class="flujograma">
-    <!-- <section class="info-carrera"> -->
+    <section class="info-carrera">
         <p>
           Cantidad total de creditos acumulados:
           <span>{{ user.creditosTot }}</span>
@@ -16,7 +16,7 @@
             {{ user.creditosFaltantes }}
           </span>
         </p>
-      <!-- </section> -->
+    </section>
     <div
       class="contenedor-materias"
       v-for="(trimestre, index) in trimestres"
@@ -158,5 +158,15 @@ h2 {
 
 .contenedor-materias {
   width: 100%;
+}
+
+.info-carrera{
+  color: $font;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: -67px;
+  padding-bottom: 1rem;
+  font-size: 17px;
 }
 </style>
