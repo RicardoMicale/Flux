@@ -3,15 +3,15 @@
   <div class="flujograma">
     <section class="info-carrera">
         <p>
-          Cantidad total de creditos acumulados:
+          Cantidad total de créditos acumulados:
           <span>{{ user.creditosTot }}</span>
         </p>
         <p>
-          Cantidad de creditos en materias BP:
+          Cantidad de créditos en materias BP:
           <span>{{ user.creditosBP }}</span>
         </p>
         <p>
-          Cantiadad de creditos faltantes pir cursar:
+          Cantidad de créditos faltantes por cursar:
           <span>
             {{ user.creditosFaltantes }}
           </span>
