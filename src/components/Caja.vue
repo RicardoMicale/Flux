@@ -1,5 +1,5 @@
 <template>
-  <div class="contenido" :class="pasada ? 'materia-pasada' : ''">
+  <div class="contenido" :class="pasada || lista ? 'materia-pasada' : ''">
     <router-link :to="'/materia/' + codigo" class="link-materia">
       <div class="informacion">
         <h3>{{ nombre }}</h3>
@@ -12,7 +12,7 @@
         icon="check"
         class="fas"
         @click="materiaPasada()"
-        :class="pasada ? 'pasada' : ''"
+        :class="pasada || lista ? 'pasada' : ''"
       ></font-awesome-icon>
       <font-awesome-icon icon="circle" class="fas"></font-awesome-icon>
     </div>
@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       usuarioActual: {},
+      lista: false,
     };
   },
   methods: {
@@ -44,16 +45,24 @@ export default {
         usuario = res.data();
       });
       if (usuario.materiasCursadas.includes(this.codigo)) {
-        return;
-      }
-      usuario.materiasCursadas.push(this.codigo);
-      usuario.creditosTot = usuario.creditosTot + 3;
-      usuario.creditosFaltantes = usuario.creditosFaltantes - 3;
-      if (this.codigo.includes("BP")) {
-        usuario.creditosBP = usuario.creditosBP + 3;
+        const index = usuario.materiasCursadas.indexOf(this.codigo);
+        usuario.materiasCursadas.splice(index, 1);
+        usuario.creditosTot = usuario.creditosTot - 3;
+        usuario.creditosFaltantes = usuario.creditosFaltantes + 3;
+        if (this.codigo.includes("BP")) {
+          usuario.creditosBP = usuario.creditosBP - 3;
+        }
+      } else {
+        usuario.materiasCursadas.push(this.codigo);
+        usuario.creditosTot = usuario.creditosTot + 3;
+        usuario.creditosFaltantes = usuario.creditosFaltantes - 3;
+        if (this.codigo.includes("BP")) {
+          usuario.creditosBP = usuario.creditosBP + 3;
+        }
       }
       fb.updateUser(firebase.auth().currentUser.uid, usuario);
-      console.log(usuario);
+
+      this.lista = !this.lista;
     },
   },
 };
