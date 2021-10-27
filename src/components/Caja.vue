@@ -1,6 +1,6 @@
 <template>
   <div class="contenido" :class="pasada || lista ? 'materia-pasada' : ''">
-    <router-link :to="'/materia/' + codigo" class="link-materia">
+    <router-link :to="'/materias/' + codigo" class="link-materia">
       <div class="informacion">
         <h3>{{ nombre }}</h3>
         <p>{{ codigo }}</p>
