@@ -2,20 +2,20 @@
   <h2>Flujograma</h2>
   <div class="flujograma">
     <section class="info-carrera">
-        <p>
-          Cantidad total de créditos acumulados:
-          <span>{{ user.creditosTot }}</span>
-        </p>
-        <p>
-          Cantidad de créditos en materias BP:
-          <span>{{ user.creditosBP }}</span>
-        </p>
-        <p>
-          Cantidad de créditos faltantes por cursar:
-          <span>
-            {{ user.creditosFaltantes }}
-          </span>
-        </p>
+      <p>
+        Cantidad total de créditos acumulados:
+        <span>{{ user.creditosTot }}</span>
+      </p>
+      <p>
+        Cantidad de créditos en materias BP:
+        <span>{{ user.creditosBP }}</span>
+      </p>
+      <p>
+        Cantidad de créditos faltantes por cursar:
+        <span>
+          {{ user.creditosFaltantes }}
+        </span>
+      </p>
     </section>
     <div
       class="contenedor-materias"
@@ -116,8 +116,7 @@ export default {
     this.getMaterias().then((res) => {
       this.trimestres = res;
     });
-  },
-  created() {
+
     let user;
 
     firebase.auth().onAuthStateChanged(async (user) => {
@@ -128,8 +127,6 @@ export default {
             this.user = response.data();
           })
           .catch((err) => console.log(err));
-      } else {
-        this.$router.push("/");
       }
     });
     return {
@@ -160,7 +157,7 @@ h2 {
   width: 100%;
 }
 
-.info-carrera{
+.info-carrera {
   color: $font;
   width: 80%;
   display: flex;
