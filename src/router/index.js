@@ -6,6 +6,7 @@ import Agregar from '../views/Agregar.vue';
 import Materia from '../views/Materia.vue';
 import Login from '../views/Login.vue';
 import Perfil from '../views/Perfil.vue';
+import NotFound from '../views/NotFound.vue';
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/login',
     name: "Login",
     component: Login
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 
