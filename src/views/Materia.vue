@@ -17,12 +17,15 @@
         <h4 v-if="prelatorias.length === 0">No tiene materias prelatorias</h4>
         <div class="materias-prelatorias" v-else>
           <router-link
-            :to="'/materias/' + prelatoria.codigo"
             v-for="prelatoria in prelatorias"
             :key="prelatoria.codigo"
+            :to="'/materias/' + prelatoria.codigo"
             class="link-prela"
             >{{ prelatoria.nombre }}
-            <font-awesome-icon icon="link" class="fas"></font-awesome-icon>
+            <font-awesome-icon
+              icon="external-link-alt"
+              class="fas"
+            ></font-awesome-icon>
           </router-link>
         </div>
         <div class="creditos-prelatorios">
@@ -71,17 +74,25 @@ export default {
     };
   },
   mounted() {
-    const route = useRoute();
-    const idMateria = route.params.id;
+    this.getMateriaActual();
+  },
+  methods: {
+    getMateriaActual() {
+      const route = useRoute();
+      const idMateria = route.params.id;
 
-    fb.getMateria(idMateria).then((res) => {
-      this.materia = res.data();
-      this.materia.prelatorias.forEach((prelatoria) => {
-        fb.getMateria(prelatoria).then((res) => {
-          this.prelatorias.push(res.data());
+      fb.getMateria(idMateria).then((res) => {
+        this.materia = res.data();
+        this.materia.prelatorias.forEach((prelatoria) => {
+          fb.getMateria(prelatoria).then((res) => {
+            this.prelatorias.push({
+              codigo: res.data().codigo,
+              nombre: res.data().nombre,
+            });
+          });
         });
       });
-    });
+    },
   },
 };
 </script>
@@ -116,9 +127,9 @@ p {
 
     span {
       position: absolute;
-      top: -3rem;
-      font-size: 5rem;
-      line-height: 4.5rem;
+      top: -4rem;
+      font-size: 8rem;
+      line-height: 6.5rem;
       font-weight: bold;
       color: $bg-secundario;
       opacity: 0.6;
@@ -157,16 +168,16 @@ h3 {
   .prelatorias {
     width: 30%;
 
-    h3 {
-      margin: 2rem 0;
-    }
-
     p {
       margin: 1rem 0;
     }
 
     .materias-prelatorias {
-      margin: 3rem 0;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      align-items: flex-start;
     }
   }
 }
@@ -175,6 +186,8 @@ h3 {
   padding: 0.8rem 1.5rem;
   background-color: $acento;
   border-radius: 0.6rem;
+  text-align: center;
+  margin: 1rem 0 0.3rem;
 }
 
 .link-prela,
@@ -186,5 +199,9 @@ h3 {
 .volver {
   margin: 5rem 0 0;
   font-size: 0.8rem;
+}
+
+.fas {
+  margin-left: 0.5rem;
 }
 </style>
