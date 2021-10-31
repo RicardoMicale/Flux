@@ -39,6 +39,10 @@ export const getMateria = async id => {
     return materia
 }
 
+export const updateMateria = (id, materia) => {
+    return coleccionMaterias.doc(id).update(materia)
+}
+
 //CRUD usuarios
 export const crearUsuario = (id, usuario) => {
     return coleccionUsuarios.doc(id).set(usuario);
