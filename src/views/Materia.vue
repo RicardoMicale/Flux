@@ -46,11 +46,31 @@
       <div class="descripcion">
         <div class="descrip">
           <h3>Descripcion</h3>
-          <p>{{ materia.descripcion }}</p>
+          <div v-if="materia.descripcion === 'Por definir tambien'">
+            <p>Esta materia aun no tiene descripcion</p>
+            <button class="agg-descrip" @click="actualizarDescripcion()">
+              <font-awesome-icon icon="plus" class="fas"></font-awesome-icon>
+              Agregar descripcion
+            </button>
+          </div>
+          <p v-else>{{ materia.descripcion }}</p>
         </div>
         <div class="discusion">
           <h3>Discusion</h3>
-          <p>{{ materia.discusion }}</p>
+          <router-link
+            :to="'/discusion/' + materia.codigo + 'D'"
+            class="link-disc"
+            >Ir al foro
+            <font-awesome-icon
+              icon="angle-right"
+              class="fas"
+            ></font-awesome-icon
+          ></router-link>
+          <p v-if="materia.discusion === 'Por definir'">
+            Aun no se ha empezado la discusion! Se el primero en comentar esta
+            materia
+          </p>
+          <Comentario v-else :comment="comment" />
         </div>
       </div>
     </section>
@@ -58,19 +78,34 @@
       ><font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
       Volver al flujograma</router-link
     >
+    <Descripcion
+      v-if="abrirEdicion"
+      class="describir"
+      @cerrar="abrirEdicion = false"
+      :codigo="codigo"
+    />
   </div>
 </template>
 
 <script>
 import * as fb from "../firebase";
 import { useRoute } from "vue-router";
+import Comentario from "../components/Comentario.vue";
+import Descripcion from "../components/Descripcion.vue";
 
 export default {
   name: "Materia",
+  components: {
+    Comentario,
+    Descripcion,
+  },
   data() {
     return {
       materia: {},
       prelatorias: [],
+      comment: {},
+      abrirEdicion: false,
+      codigo: "",
     };
   },
   mounted() {
@@ -83,6 +118,7 @@ export default {
 
       fb.getMateria(idMateria).then((res) => {
         this.materia = res.data();
+        this.codigo = this.materia.codigo;
         this.materia.prelatorias.forEach((prelatoria) => {
           fb.getMateria(prelatoria).then((res) => {
             this.prelatorias.push({
@@ -91,7 +127,17 @@ export default {
             });
           });
         });
+        if (this.materia.discusion !== "Por definir") {
+          fb.getDiscusion(this.materia.codigo + "D").then((res) => {
+            if (res.data().comentarios.length > 0) {
+              this.comment = res.data().comentarios[0];
+            }
+          });
+        }
       });
+    },
+    actualizarDescripcion() {
+      this.abrirEdicion = !this.abrirEdicion;
     },
   },
 };
@@ -199,9 +245,43 @@ h3 {
 .volver {
   margin: 5rem 0 0;
   font-size: 0.8rem;
+  width: fit-content;
+}
+
+.link-disc {
+  text-decoration: none;
+  color: $font;
 }
 
 .fas {
   margin-left: 0.5rem;
+}
+
+.agg-descrip {
+  font-family: $fonts;
+  color: $font;
+  background-color: $bg-secundario;
+  padding: 0.8rem 1.4rem;
+  outline: none;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
+.describir {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.descrip {
+  margin: 2rem 0;
+
+  p {
+    margin: 1rem 0;
+    width: 90%;
+  }
 }
 </style>

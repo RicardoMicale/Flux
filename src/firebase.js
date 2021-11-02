@@ -18,6 +18,7 @@ const db = app.firestore();
 
 const coleccionMaterias = db.collection('Materias');
 const coleccionUsuarios = db.collection('Usuarios');
+const coleccionDiscusiones = db.collection('Discusiones');
 
 //CRUD materias
 export const crearMateria = (id, materia) => {
@@ -38,6 +39,10 @@ export const getMateria = async id => {
     return materia
 }
 
+export const updateMateria = (id, materia) => {
+    return coleccionMaterias.doc(id).update(materia)
+}
+
 //CRUD usuarios
 export const crearUsuario = (id, usuario) => {
     return coleccionUsuarios.doc(id).set(usuario);
@@ -50,6 +55,20 @@ export const getUsuario = async id => {
 
 export const updateUser = (id, user) => {
     return coleccionUsuarios.doc(id).update(user)
+}
+
+//CRUD discusiones
+export const crearDiscusion = (id, discusion) => {
+    return coleccionDiscusiones.doc(id).set(discusion)
+}
+
+export const getDiscusion = async (idDiscusion) => {
+    const discusion = await coleccionDiscusiones.doc(idDiscusion).get();
+    return discusion;
+}
+
+export const updateDiscusion = (id, discusion) => {
+    return coleccionDiscusiones.doc(id).update(discusion);
 }
 
 export default app;

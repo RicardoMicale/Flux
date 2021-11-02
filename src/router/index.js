@@ -7,6 +7,7 @@ import Materia from '../views/Materia.vue';
 import Login from '../views/Login.vue';
 import Perfil from '../views/Perfil.vue';
 import NotFound from '../views/NotFound.vue';
+import Discusion from '../views/Discusion.vue';
 
 const routes = [
   {
@@ -41,8 +42,13 @@ const routes = [
   },
   {
     path: '/login',
-    name: "Login",
+    name: 'Login',
     component: Login
+  },
+  {
+    path: '/discusion/:id',
+    name: 'Discusion',
+    component: Discusion
   },
   {
     path: '/:pathMatch(.*)*',
