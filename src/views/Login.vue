@@ -14,11 +14,12 @@ export default {
       firebase
         .auth()
         .signInWithPopup(provider)
-        .then((result) => {
+        .then(result => {
           let token = result.credential.accessToken;
           let user = result.user;
           console.log(token);
           console.log(user);
+          localStorage.getItem('user') ? this.user = JSON.parse(localStorage.getItem('user')) : this.user = null;
         })
         .catch((err) => {
           console.log(err);
