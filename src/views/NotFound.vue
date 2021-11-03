@@ -2,7 +2,7 @@
   <div>
     <section class="mensaje">
       <h2 class="error-msg">Error 404</h2>
-      <h4>Pisaste el saman!</h4>
+      <h4>Pisaste el samán!</h4>
       <p>No se encontro lo que buscabas</p>
       <router-link to="/" class="volver"
         ><font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
