@@ -36,6 +36,13 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   margin: 1rem;
+
+  &:hover {
+    p {
+      font-weight: bold;
+      color: $acento;
+    }
+  }
 }
 
 p {
