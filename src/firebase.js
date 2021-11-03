@@ -39,6 +39,11 @@ export const getMateria = async id => {
     return materia
 }
 
+export const getMateriaDinamica = async id => {
+    const materia = await coleccionMaterias.doc(id);
+    return materia
+}
+
 export const updateMateria = (id, materia) => {
     return coleccionMaterias.doc(id).update(materia)
 }
