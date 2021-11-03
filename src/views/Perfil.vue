@@ -2,11 +2,16 @@
   <div class="contenido">
     <div class="info-estudiante">
       <section class="info-contacto">
-        <h2>{{ user.nombre }}</h2>
-        <h4>{{ user.carrera }}</h4>
-        <p>
-          Contacto: <a :href="'mailto:' + user.email">{{ user.email }}</a>
-        </p>
+        <h2 class="nombre">{{ user.nombre }}</h2>
+        
+        <h3 class="carrera">{{ user.carrera }}</h3>
+        <h4 class="contacto">Contacto:</h4>
+        <ul class="lista-contacto">
+          <li><p>
+            <a :href="'mailto:' + user.email">{{ user.email }}</a>
+          </p></li>
+          <li><p>{{user.twitter}}</p></li>
+        </ul>
       </section>
       <section class="info-carrera">
         <p>
@@ -102,6 +107,9 @@ export default {
         }
       }
     }
+  }
+  .contacto{
+    padding: 1rem;
   }
 }
 </style>
