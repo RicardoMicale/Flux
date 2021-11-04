@@ -1,9 +1,11 @@
 <template>
-  <div>
-    Discusion
+
+   <h1>Discusion</h1>
+    <h3>Agregar comentario +</h3> 
+<div class="cont">
     <section class="comentarios">
       <div class="comentario" v-for="(comment, index) in comments" :key="index">
-        <Comentario :comment="comment" />
+        <Comentario  :comment="comment" class="comenta"/>
       </div>
     </section>
   </div>
@@ -47,7 +49,45 @@ export default {
     });
   },
 };
-</script>
+</script>-->
 
 <style lang="scss" scoped>
+@import "../variabes.scss";
+  h1{
+    color: $font;
+    padding: 2%;
+  }
+  
+  .cont{
+  width: 80%;
+  height:  80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+}
+.comentarios{
+  width: 50%;
+  height: 100%;
+  
+}
+.comentario{
+  width: 100%;
+  height: 30vh;
+  margin-top: 2%;
+}
+.comenta{
+  width: 100%;
+  height: 100%;
+  background-color: $bg-secundario;
+}
+
+h3{
+  color: white;
+  margin-right: 0;
+  padding-right: 2%;
+  padding-left: 2%;
+  text-align: right;
+}
 </style>

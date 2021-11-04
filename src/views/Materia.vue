@@ -76,7 +76,7 @@
             Aun no se ha empezado la discusion! Se el primero en comentar esta
             materia
           </p>
-          <Comentario v-else :comment="comment" />
+          <Comentario  v-else :comment="comment" class="comenta" />
         </div>
       </div>
     </section>
@@ -336,7 +336,10 @@ h3 {
   top: 0;
   left: 0;
 }
+.comenta{
+  position: absolute;
 
+}
 .descrip {
   margin: 2rem 0;
 
