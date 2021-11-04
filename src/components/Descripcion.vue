@@ -45,6 +45,7 @@ export default {
         materia.descripcion = this.descrip;
 
         fb.updateMateria(codigo, materia);
+        this.cerrar();
       });
     },
     cerrar() {

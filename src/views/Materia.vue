@@ -43,6 +43,7 @@
           </p>
         </div>
       </div>
+      <div class="separador"></div>
       <div class="descripcion">
         <div class="descrip">
           <h3>Descripcion</h3>
@@ -66,7 +67,12 @@
               class="fas"
             ></font-awesome-icon
           ></router-link>
-          <p v-if="materia.discusion === 'Por definir'">
+          <p
+            v-if="
+              materia.discusion === 'Por definir' ||
+              Object.keys(comment).length === 0
+            "
+          >
             Aun no se ha empezado la discusion! Se el primero en comentar esta
             materia
           </p>
@@ -89,7 +95,7 @@
 
 <script>
 import * as fb from "../firebase";
-import { useRoute } from "vue-router";
+// import { useRoute } from "vue-router";
 import Comentario from "../components/Comentario.vue";
 import Descripcion from "../components/Descripcion.vue";
 
@@ -111,29 +117,68 @@ export default {
   mounted() {
     this.getMateriaActual();
   },
+  watch: {
+    "$route.path": function () {
+      this.getMateriaActual();
+    },
+  },
   methods: {
+    resetValues() {
+      this.materia = {};
+      this.prelatorias = [];
+      this.comment = {};
+      this.abrirEdicion = false;
+      this.codigo = "";
+    },
     getMateriaActual() {
-      const route = useRoute();
-      const idMateria = route.params.id;
+      // const route = useRoute();
+      const idMateria = this.$route.params.id;
 
-      fb.getMateria(idMateria).then((res) => {
-        this.materia = res.data();
-        this.codigo = this.materia.codigo;
-        this.materia.prelatorias.forEach((prelatoria) => {
-          fb.getMateria(prelatoria).then((res) => {
-            this.prelatorias.push({
-              codigo: res.data().codigo,
-              nombre: res.data().nombre,
+      // fb.getMateria(idMateria).then((res) => {
+      //   this.materia = res.data();
+      //   this.codigo = this.materia.codigo;
+      //   this.materia.prelatorias.forEach((prelatoria) => {
+      //     fb.getMateria(prelatoria).then((res) => {
+      //       this.prelatorias.push({
+      //         codigo: res.data().codigo,
+      //         nombre: res.data().nombre,
+      //       });
+      //     });
+      //   });
+      //   if (this.materia.discusion !== "Por definir") {
+      //     fb.getDiscusion(this.materia.codigo + "D").then((res) => {
+      //       if (res.data().comentarios.length > 0) {
+      //         this.comment = res.data().comentarios[0];
+      //       }
+      //     });
+      //   }
+      // });
+
+      fb.getMateriaDinamica(idMateria).then((res) => {
+        res.onSnapshot((snap) => {
+          this.materia = snap.data();
+          console.log(this.materia);
+          this.codigo = this.materia.codigo;
+          if (this.prelatorias.length > 0) {
+            this.prelatorias = [];
+          }
+          this.materia.prelatorias.forEach((prelatoria) => {
+            fb.getMateria(prelatoria).then((res) => {
+              const materia = {
+                codigo: res.data().codigo,
+                nombre: res.data().nombre,
+              };
+              this.prelatorias.push(materia);
             });
           });
+          if (this.materia.discusion !== "Por definir") {
+            fb.getDiscusion(this.materia.codigo + "D").then((res) => {
+              if (res.data().comentarios.length > 0) {
+                this.comment = res.data().comentarios[0];
+              }
+            });
+          }
         });
-        if (this.materia.discusion !== "Por definir") {
-          fb.getDiscusion(this.materia.codigo + "D").then((res) => {
-            if (res.data().comentarios.length > 0) {
-              this.comment = res.data().comentarios[0];
-            }
-          });
-        }
       });
     },
     actualizarDescripcion() {
@@ -210,9 +255,11 @@ h3 {
   display: flex;
   align-items: center;
   height: 40%;
+  width: 100%;
 
   .prelatorias {
     width: 30%;
+    margin-right: 1rem;
 
     p {
       margin: 1rem 0;
@@ -226,6 +273,13 @@ h3 {
       align-items: flex-start;
     }
   }
+}
+
+.descripcion {
+  width: 65%;
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .link-prela {
@@ -246,6 +300,13 @@ h3 {
   margin: 5rem 0 0;
   font-size: 0.8rem;
   width: fit-content;
+}
+
+.separador {
+  height: 100%;
+  width: 0.5rem;
+  border-radius: 50000px;
+  background-color: $acento;
 }
 
 .link-disc {

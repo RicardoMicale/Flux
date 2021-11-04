@@ -2,11 +2,18 @@
   <div class="contenido">
     <div class="info-estudiante">
       <section class="info-contacto">
-        <h2>{{ user.nombre }}</h2>
-        <h4>{{ user.carrera }}</h4>
-        <p>
-          Contacto: <a :href="'mailto:' + user.email">{{ user.email }}</a>
-        </p>
+        <h2 class="nombre">{{ user.nombre }}</h2>
+        
+        <h3 class="carrera">{{ user.carrera }}</h3>
+        <h4 class="contacto">Contacto:</h4>
+        <ul class="lista-contacto">
+          <li><p>
+            <a :href="'mailto:' + user.email">{{ user.email }}</a>
+          </p></li>
+          <li><p>Twitter: <input class="red-input twitter" type="text" :disabled= "disabled" /></p></li>
+          <li><p>Instagram: <input class="red-input instagram" type="text" :disabled= "disabled" /></p></li>
+          <li><p>LinkedIn: <input class="red-input linekedIn" type="text" :disabled= "disabled" /></p></li>
+        </ul>
       </section>
       <section class="info-carrera">
         <p>
@@ -25,6 +32,7 @@
         </p>
       </section>
     </div>
+    <button class="btn-editar" @click="disabled = !disabled">Editar Perfil</button>
   </div>
 </template>
 
@@ -39,6 +47,7 @@ export default {
   data() {
     return {
       user: {},
+      disabled: true,
     };
   },
   created() {
@@ -59,6 +68,10 @@ export default {
     return {
       user,
     };
+  },
+  editar() {
+    this.disabled = !this.disabled;
+    this.UsuarioService.updateUser(this.user.uid, this.user);
   },
 };
 </script>
@@ -101,6 +114,39 @@ export default {
           font-weight: bold;
         }
       }
+    }
+  }
+  .contacto{
+    padding: 1rem;
+  }
+  .lista-contacto{
+    list-style-type: none;
+    .red-input{
+      background-color: #e2e2e2;
+      color: $bg-dark;
+      &:disabled{
+        background: transparent;
+        border: none;
+        outline: none;
+        color: $font;
+      }
+    }
+  }
+  button{
+    background-color: $acento;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    border: none;
+    outline: none;
+    font-family: $fonts;
+    color: $font;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:active {
+      background-color: #b63a11;
+      color: #e2e2e2;
     }
   }
 }

@@ -70,6 +70,7 @@ export default {
         .then((result) => {
           const user = result.user;
           const id = user.uid;
+          localStorage.setItem("user",id)
           fb.getUsuario(id).then((res) => {
             if (!res.exists) {
               const usuario = this.nuevoUsuario(user.displayName, user.email);
