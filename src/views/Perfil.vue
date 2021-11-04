@@ -1,18 +1,20 @@
 <template>
   <div class="contenido">
+    <h1 class="titulo">Perfil</h1>
     <div class="info-estudiante">
       <section class="info-contacto">
         <h2 class="nombre">{{ user.nombre }}</h2>
-        
         <h3 class="carrera">{{ user.carrera }}</h3>
-        <h4 class="contacto">Contacto:</h4>
+        <h3 class="contacto">Contacto:</h3>
+        <div class="nombre-grande">
+        <span>{{ user.nombre }}</span>
+        </div>
         <ul class="lista-contacto">
           <li><p>
             <a :href="'mailto:' + user.email">{{ user.email }}</a>
           </p></li>
-          <li><p>Twitter: <input class="red-input twitter" type="text" :disabled= "disabled" /></p></li>
-          <li><p>Instagram: <input class="red-input instagram" type="text" :disabled= "disabled" /></p></li>
-          <li><p>LinkedIn: <input class="red-input linekedIn" type="text" :disabled= "disabled" /></p></li>
+          <li><p>Twitter: @<input class="red-input twitter" type="text" :disabled= "disabled" /></p></li>
+          <li><p>Instagram: @<input class="red-input instagram" type="text" :disabled= "disabled" /></p></li>
         </ul>
       </section>
       <section class="info-carrera">
@@ -31,8 +33,9 @@
           </span>
         </p>
       </section>
+      <button class="btn-editar" @click="disabled = !disabled" v-if= "disabled">Editar Contacto</button>
+      <button class="btn-editar" @click="disabled = !disabled" v-else>Guardar Cambios</button>
     </div>
-    <button class="btn-editar" @click="disabled = !disabled">Editar Perfil</button>
   </div>
 </template>
 
@@ -82,6 +85,10 @@ export default {
 .contenido {
   padding: 1.5rem 3rem;
 
+  h1 {
+    color: $font;
+  }
+
   .info-estudiante {
     color: $font;
 
@@ -106,7 +113,6 @@ export default {
 
     .info-carrera {
       margin: 2rem 2rem 1rem;
-
       p {
         margin: 0.3rem 0;
 
@@ -116,15 +122,15 @@ export default {
       }
     }
   }
-  .contacto{
+  .contacto {
     padding: 1rem;
   }
-  .lista-contacto{
+  .lista-contacto {
     list-style-type: none;
-    .red-input{
+    .red-input {
       background-color: #e2e2e2;
       color: $bg-dark;
-      &:disabled{
+      &:disabled {
         background: transparent;
         border: none;
         outline: none;
@@ -132,7 +138,7 @@ export default {
       }
     }
   }
-  button{
+  .btn-editar {
     background-color: $acento;
     padding: 0.5rem 1rem;
     border-radius: 0.4rem;
@@ -144,9 +150,31 @@ export default {
     cursor: pointer;
     transition: all 0.2s;
 
+    &:hover {
+      background-color: #b63a11;
+      color: #e2e2e2;
+    }
+
     &:active {
       background-color: #b63a11;
       color: #e2e2e2;
+    }
+  }
+
+  .nombre-grande {
+    position: relative;
+    width: 65%;
+    user-select: none;
+    span {
+      position: absolute;
+      top: -4rem;
+      left: 45rem;
+      font-size: 8rem;
+      line-height: 6.5rem;
+      font-weight: bold;
+      color: $bg-secundario;
+      opacity: 0.6;
+      z-index: -1;
     }
   }
 }
