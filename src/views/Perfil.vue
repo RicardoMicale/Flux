@@ -176,12 +176,12 @@ export default {
     transition: all 0.2s;
 
     &:hover {
-      background-color: #b63a11;
+      background-color: $button-press;
       color: $input-bg-alt;
     }
 
     &:active {
-      background-color: #b63a11;
+      background-color: $button-press;
       color: $input-bg-alt;
     }
   }
