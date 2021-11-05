@@ -1,7 +1,7 @@
 <template>
   <div v-if="comment" class="comment-container">
     <div class="header">
-      <img :src="photo" alt="foto usuario" />
+      <img :src="usuario.photo" alt="foto usuario" />
       <div class="info">
         <h3>{{ usuario.nombre }}</h3>
         <h4>{{ usuario.carrera }}</h4>
@@ -16,9 +16,9 @@
 
 <script>
 import * as fb from "../firebase";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+// import firebase from "firebase/compat/app";
+// import "firebase/compat/auth";
+// import "firebase/compat/firestore";
 
 export default {
   name: "Comentario",
@@ -28,14 +28,12 @@ export default {
   data() {
     return {
       usuario: {},
-      photo: "",
     };
   },
   mounted() {
     fb.getUsuario(this.comment.id).then((res) => {
       this.usuario = res.data();
     });
-    this.photo = firebase.auth().currentUser.photoURL;
   },
 };
 </script>
