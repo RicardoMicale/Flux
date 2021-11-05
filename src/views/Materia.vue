@@ -80,13 +80,13 @@
         </div>
       </div>
     </section>
-    <router-link to="/flujograma" class="volver"
-      ><font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
-      Volver al flujograma</router-link
-    >
+    <router-link to="/flujograma" class="volver">
+      <font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
+      Volver al flujograma
+    </router-link>
     <Descripcion
-      v-if="abrirEdicion"
       class="describir"
+      v-if="abrirEdicion"
       @cerrar="abrirEdicion = false"
       :codigo="codigo"
     />
@@ -333,6 +333,8 @@ h3 {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .descrip {
