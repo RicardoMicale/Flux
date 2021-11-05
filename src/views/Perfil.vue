@@ -7,14 +7,32 @@
         <h3 class="carrera">{{ user.carrera }}</h3>
         <h3 class="contacto">Contacto:</h3>
         <div class="nombre-grande">
-        <span>{{ user.nombre }}</span>
+          <span>{{ user.nombre }}</span>
         </div>
         <ul class="lista-contacto">
-          <li><p>
-            <a :href="'mailto:' + user.email">{{ user.email }}</a>
-          </p></li>
-          <li><p>Twitter: @<input class="red-input twitter" type="text" :disabled= "disabled" /></p></li>
-          <li><p>Instagram: @<input class="red-input instagram" type="text" :disabled= "disabled" /></p></li>
+          <li>
+            <p>
+              <a :href="'mailto:' + user.email">{{ user.email }}</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              Twitter: @<input
+                class="red-input twitter"
+                type="text"
+                :disabled="disabled"
+              />
+            </p>
+          </li>
+          <li>
+            <p>
+              Instagram: @<input
+                class="red-input instagram"
+                type="text"
+                :disabled="disabled"
+              />
+            </p>
+          </li>
         </ul>
       </section>
       <section class="info-carrera">
@@ -33,8 +51,12 @@
           </span>
         </p>
       </section>
-      <button class="btn-editar" @click="disabled = !disabled" v-if= "disabled">Editar Contacto</button>
-      <button class="btn-editar" @click="disabled = !disabled" v-else>Guardar Cambios</button>
+      <button class="btn-editar" @click="disabled = !disabled" v-if="disabled">
+        Editar Contacto
+      </button>
+      <button class="btn-editar" @click="disabled = !disabled" v-else>
+        Guardar Cambios
+      </button>
     </div>
   </div>
 </template>
@@ -127,9 +149,12 @@ export default {
   }
   .lista-contacto {
     list-style-type: none;
+
     .red-input {
-      background-color: #e2e2e2;
+      background-color: $input-bg-alt;
       color: $bg-dark;
+      font-family: $fonts;
+
       &:disabled {
         background: transparent;
         border: none;
@@ -152,12 +177,12 @@ export default {
 
     &:hover {
       background-color: #b63a11;
-      color: #e2e2e2;
+      color: $input-bg-alt;
     }
 
     &:active {
       background-color: #b63a11;
-      color: #e2e2e2;
+      color: $input-bg-alt;
     }
   }
 
@@ -165,6 +190,7 @@ export default {
     position: relative;
     width: 65%;
     user-select: none;
+
     span {
       position: absolute;
       top: -4rem;
