@@ -57,11 +57,11 @@
           <p v-else>{{ materia.descripcion }}</p>
         </div>
         <div class="discusion">
-          <h3>Discusion</h3>
           <router-link
             :to="'/discusion/' + materia.codigo + 'D'"
             class="link-disc"
-            >Ir al foro
+          >
+            Ir al foro
             <font-awesome-icon
               icon="angle-right"
               class="fas"
@@ -80,13 +80,13 @@
         </div>
       </div>
     </section>
-    <router-link to="/flujograma" class="volver"
-      ><font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
-      Volver al flujograma</router-link
-    >
+    <router-link to="/flujograma" class="volver">
+      <font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
+      Volver al flujograma
+    </router-link>
     <Descripcion
-      v-if="abrirEdicion"
       class="describir"
+      v-if="abrirEdicion"
       @cerrar="abrirEdicion = false"
       :codigo="codigo"
     />
@@ -95,7 +95,6 @@
 
 <script>
 import * as fb from "../firebase";
-// import { useRoute } from "vue-router";
 import Comentario from "../components/Comentario.vue";
 import Descripcion from "../components/Descripcion.vue";
 
@@ -131,7 +130,6 @@ export default {
       this.codigo = "";
     },
     getMateriaActual() {
-      // const route = useRoute();
       const idMateria = this.$route.params.id;
 
       // fb.getMateria(idMateria).then((res) => {
@@ -156,12 +154,12 @@ export default {
 
       fb.getMateriaDinamica(idMateria).then((res) => {
         res.onSnapshot((snap) => {
-          this.materia = snap.data();
-          console.log(this.materia);
-          this.codigo = this.materia.codigo;
+          this.materia = snap.data(); //Se define la materia
+          this.codigo = this.materia.codigo; //Se agarra el codigo por separado
           if (this.prelatorias.length > 0) {
-            this.prelatorias = [];
+            this.prelatorias = []; //Si la lista tenia valores, se vacia para que tenga valores nuevos
           }
+          //Se buscan las materias prelaotrias y se agregan al array con sus atributos
           this.materia.prelatorias.forEach((prelatoria) => {
             fb.getMateria(prelatoria).then((res) => {
               const materia = {
@@ -171,6 +169,7 @@ export default {
               this.prelatorias.push(materia);
             });
           });
+          //Si la materia tiene algun comentario en la discusion se muestra el primero
           if (this.materia.discusion !== "Por definir") {
             fb.getDiscusion(this.materia.codigo + "D").then((res) => {
               if (res.data().comentarios.length > 0) {
@@ -253,7 +252,7 @@ h3 {
 
 .informacion {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   height: 40%;
   width: 100%;
 
@@ -312,6 +311,11 @@ h3 {
 .link-disc {
   text-decoration: none;
   color: $font;
+  font-size: 0.8rem;
+
+  .fas {
+    margin-left: 0.2rem;
+  }
 }
 
 .fas {
@@ -328,21 +332,22 @@ h3 {
   border-radius: 0.6rem;
   cursor: pointer;
   font-size: 1rem;
-  margin: 1rem 0;
 }
 
 .describir {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .descrip {
-  margin: 2rem 0;
+  margin-bottom: 1rem;
+}
 
-  p {
-    margin: 1rem 0;
-    width: 90%;
-  }
+.descrip p {
+  margin: 1rem 0;
+  width: 90%;
 }
 </style>

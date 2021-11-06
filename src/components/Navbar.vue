@@ -70,10 +70,14 @@ export default {
         .then((result) => {
           const user = result.user;
           const id = user.uid;
-          localStorage.setItem("user",id)
+          localStorage.setItem("user", id);
           fb.getUsuario(id).then((res) => {
             if (!res.exists) {
-              const usuario = this.nuevoUsuario(user.displayName, user.email);
+              const usuario = this.nuevoUsuario(
+                user.displayName,
+                user.email,
+                user.photoURL
+              );
               fb.crearUsuario(id, usuario);
             }
           });
@@ -84,7 +88,7 @@ export default {
         });
       // this.$router.push("/login");
     },
-    nuevoUsuario(nombre, email) {
+    nuevoUsuario(nombre, email, foto) {
       const user = {
         nombre: nombre,
         carrera: "Ingenieria de sistemas",
@@ -95,6 +99,7 @@ export default {
         trimestreActual: [],
         materiasCursadas: [],
         materiasDisponibles: [],
+        foto: foto,
       };
 
       return user;
