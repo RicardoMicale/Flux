@@ -1,7 +1,7 @@
 <template>
   <div v-if="comment" class="comment-container">
     <div class="header">
-      <img :src="usuario.photo" alt="foto usuario" />
+      <img :src="usuario.foto" alt="foto usuario" />
       <div class="info">
         <h3>{{ usuario.nombre }}</h3>
         <h4>{{ usuario.carrera }}</h4>
@@ -24,14 +24,15 @@ export default {
   name: "Comentario",
   props: {
     comment: Object,
+    id: String,
   },
   data() {
     return {
       usuario: {},
     };
   },
-  mounted() {
-    fb.getUsuario(this.comment.id).then((res) => {
+  created() {
+    fb.getUsuario(this.id).then((res) => {
       this.usuario = res.data();
     });
   },
@@ -48,7 +49,7 @@ div {
   width: 90%;
   background-color: $bg-secundario;
   padding: 1.2rem 2rem 2rem;
-  margin: 1.2rem 0;
+  margin: 0.4rem 0;
   border-radius: 0.7rem;
 
   .header {

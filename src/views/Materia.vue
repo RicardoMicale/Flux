@@ -57,7 +57,6 @@
           <p v-else>{{ materia.descripcion }}</p>
         </div>
         <div class="discusion">
-          <h3>Discusion</h3>
           <router-link
             :to="'/discusion/' + materia.codigo + 'D'"
             class="link-disc"
@@ -311,6 +310,11 @@ h3 {
 .link-disc {
   text-decoration: none;
   color: $font;
+  font-size: 0.8rem;
+
+  .fas {
+    margin-left: 0.2rem;
+  }
 }
 
 .fas {

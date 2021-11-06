@@ -1,16 +1,29 @@
 <template>
-  <div class="comment-section">
-    <h1>Discusion</h1>
-    <button class="add-comment" @click="aggComment()">
-      Agregar comentario<font-awesome-icon
-        icon="plus"
-        class="fas"
-      ></font-awesome-icon>
-    </button>
-    <section class="comentarios">
-      <div class="comentario" v-for="(comment, index) in comments" :key="index">
-        <Comentario :comment="comment" class="comenta" />
-      </div>
+  <div class="discusion">
+    <div class="informacion">
+      <h2>{{ materia.nombre }}</h2>
+      <h4>{{ materia.codigo }}</h4>
+      <h3>Descripcion</h3>
+      <p>
+        {{
+          materia.descripcion !== "Por definir tambien"
+            ? materia.descripcion
+            : "Aun no se ha agregado una descripcion"
+        }}
+      </p>
+    </div>
+    <section class="comment-section">
+      <button class="add-comment" @click="aggComment()">
+        Agregar comentario<font-awesome-icon
+          icon="plus"
+          class="fas"
+        ></font-awesome-icon>
+      </button>
+      <section class="comentarios">
+        <div class="comentario" v-for="comment in comments" :key="comment.id">
+          <Comentario :comment="comment" :id="comment[0].id" class="comenta" />
+        </div>
+      </section>
     </section>
   </div>
 </template>
@@ -64,8 +77,34 @@ export default {
 <style lang="scss" scoped>
 @import "../variabes.scss";
 
+.discusion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+  height: 100%;
+}
+
+.informacion {
+  width: 30%;
+  color: $font;
+
+  h4 {
+    opacity: 0.7;
+    margin: 1rem 0 3rem;
+  }
+
+  h3 {
+    margin: 0 0 0.6rem;
+  }
+
+  p {
+    opacity: 0.8;
+  }
+}
+
 .comment-section {
-  padding: 0 3rem;
+  width: 70%;
 }
 
 h1 {
