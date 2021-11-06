@@ -31,7 +31,7 @@ export default {
       usuario: {},
     };
   },
-  created() {
+  mounted() {
     fb.getUsuario(this.id).then((res) => {
       this.usuario = res.data();
     });
