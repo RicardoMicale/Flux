@@ -64,7 +64,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  //   background-color: $popup-bg;
+  background-color: $popup-bg;
 }
 
 .modal {
