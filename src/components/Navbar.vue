@@ -109,6 +109,7 @@ export default {
           this.loggeado = !this.loggeado;
           this.$router.push("/");
         });
+        localStorage.removeItem('user');
     },
   },
 };
