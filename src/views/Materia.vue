@@ -60,7 +60,8 @@
           <router-link
             :to="'/discusion/' + materia.codigo + 'D'"
             class="link-disc"
-            >Ir al foro
+          >
+            Ir al foro
             <font-awesome-icon
               icon="angle-right"
               class="fas"
@@ -251,7 +252,7 @@ h3 {
 
 .informacion {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   height: 40%;
   width: 100%;
 
@@ -342,11 +343,11 @@ h3 {
 }
 
 .descrip {
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+}
 
-  p {
-    margin: 1rem 0;
-    width: 90%;
-  }
+.descrip p {
+  margin: 1rem 0;
+  width: 90%;
 }
 </style>
