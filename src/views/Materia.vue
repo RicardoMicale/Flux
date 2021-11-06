@@ -57,11 +57,11 @@
           <p v-else>{{ materia.descripcion }}</p>
         </div>
         <div class="discusion">
-          <h3>Discusion</h3>
           <router-link
             :to="'/discusion/' + materia.codigo + 'D'"
             class="link-disc"
-            >Ir al foro
+          >
+            Ir al foro
             <font-awesome-icon
               icon="angle-right"
               class="fas"
@@ -252,7 +252,7 @@ h3 {
 
 .informacion {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   height: 40%;
   width: 100%;
 
@@ -311,6 +311,11 @@ h3 {
 .link-disc {
   text-decoration: none;
   color: $font;
+  font-size: 0.8rem;
+
+  .fas {
+    margin-left: 0.2rem;
+  }
 }
 
 .fas {
@@ -338,11 +343,11 @@ h3 {
 }
 
 .descrip {
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+}
 
-  p {
-    margin: 1rem 0;
-    width: 90%;
-  }
+.descrip p {
+  margin: 1rem 0;
+  width: 90%;
 }
 </style>

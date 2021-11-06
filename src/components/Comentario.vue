@@ -1,10 +1,10 @@
 <template>
   <div v-if="comment" class="comment-container">
     <div class="header">
-      <img :src="usuario.photo" alt="foto usuario" />
+      <img :src="usuario.foto" alt="foto usuario" />
       <div class="info">
         <h3>{{ usuario.nombre }}</h3>
-        <h4>{{ usuario.carrera }}</h4>
+        <p>{{ usuario.carrera }}</p>
       </div>
     </div>
     <p>{{ comment.comentario }}</p>
@@ -48,7 +48,7 @@ div {
   width: 90%;
   background-color: $bg-secundario;
   padding: 1.2rem 2rem 2rem;
-  margin: 1.2rem 0;
+  margin: 0.4rem 0 2rem;
   border-radius: 0.7rem;
 
   .header {
@@ -63,16 +63,16 @@ div {
       height: 3rem;
       margin-right: 0.5rem;
     }
+
+    p {
+      opacity: 0.7;
+      font-size: 0.8rem;
+    }
   }
 
   h3 {
     margin-bottom: 0.2rem;
     font-size: 1rem;
-  }
-
-  h4 {
-    opacity: 0.7;
-    font-size: 0.8rem;
   }
 }
 </style>
