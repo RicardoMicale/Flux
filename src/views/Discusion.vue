@@ -11,6 +11,10 @@
             : "Aun no se ha agregado una descripcion"
         }}
       </p>
+      <router-link :to="'/materias/' + materia.codigo" class="link">
+        <font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
+        Volver a {{ materia.nombre }}
+      </router-link>
     </div>
     <section class="comment-section">
       <button class="add-comment" @click="aggComment()">
@@ -21,7 +25,7 @@
       </button>
       <section class="comentarios">
         <div class="comentario" v-for="comment in comments" :key="comment.id">
-          <Comentario :comment="comment" :id="comment[0].id" class="comenta" />
+          <Comentario :comment="comment" />
         </div>
       </section>
     </section>
@@ -61,7 +65,7 @@ export default {
         fb.updateMateria(idMateria, this.materia);
       } else {
         fb.getDiscusion(idDiscusion).then((response) => {
-          this.comments = response.data();
+          this.comments = response.data().comentarios;
         });
       }
     });
@@ -79,7 +83,7 @@ export default {
 
 .discusion {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 2rem 3rem;
   height: 100%;
@@ -100,6 +104,7 @@ export default {
 
   p {
     opacity: 0.8;
+    margin-bottom: 2rem;
   }
 }
 
@@ -119,7 +124,7 @@ h1 {
   outline: none;
   border: none;
   color: $font;
-  margin: 1rem 0;
+  margin: 0.2rem 0 1rem;
   border-radius: 0.4rem;
   cursor: pointer;
   transition: all 0.3s;
@@ -131,6 +136,15 @@ h1 {
   &:active {
     background-color: $button-press;
     color: $input-bg-alt;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: $font;
+
+  &:hover {
+    color: $font-secundario;
   }
 }
 </style>
