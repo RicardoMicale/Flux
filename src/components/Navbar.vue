@@ -58,7 +58,7 @@ export default {
     };
   },
   created() {
-    this.loggeado = firebase.auth().currentUser || false;
+    this.loggeado = localStorage.getItem('user') ? true : false;
   },
   methods: {
     //TODO: mover metodos login a pagina login y dejar router push en metodo login del navbar
