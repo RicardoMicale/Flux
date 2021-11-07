@@ -20,29 +20,29 @@
           </li>
           <li>
             <p>
-              Twitter: @<a :href="`https://www.twitter.com/${userTwitter}`" target="_blank" v-if="disabled"> {{userTwitter}} </a><input
+              Twitter: @<a :href="`https://www.twitter.com/${user.twitter}`" target="_blank" v-if="disabled"> {{ user.twitter ? user.twitter : '' }} </a><input
                 class="red-input twitter"
                 type="text"
                 v-if="!disabled"
-                v-model="userTwitter"
-                :placeholder="userTwitter"/>
+                v-model="user.twitter"
+                :placeholder="user.twitter"/>
             </p>
           </li>
           <li>
             <p>
-              Instagram: @<a :href="`https://www.instagram.com/${userInstagram}`" target="_blank" v-if="disabled"> {{userInstagram}} </a><input
+              Instagram: @<a :href="`https://www.instagram.com/${user.instagram}`" target="_blank" v-if="disabled"> {{ user.instagram ? user.instagram : '' }}  </a><input
                 class="red-input instagram"
                 type="text"
                 v-if="!disabled"
-                v-model="userInstagram"
-                :placeholder="userInstagram"/>
+                v-model="user.instagram"
+                :placeholder="user.instagram"/>
             </p>
           </li>
         </ul>
         <button class="btn-editar" @click="disabled = !disabled" v-if="disabled">
         Editar Redes
       </button>
-      <button class="btn-editar" @click="disabled=!disabled" v-else>
+      <button class="btn-editar" @click="disabled=!disabled; guardar()" v-else>
         Guardar Cambios
       </button>
       </section>
@@ -70,7 +70,6 @@
 <script>
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { getAuth } from "firebase/auth";
 import "firebase/compat/firestore";
 import * as fb from "../firebase";
 
@@ -80,14 +79,13 @@ export default {
     return {
       user: {},
       disabled: true,
-      userTwitter: "",
-      userInstagram: "",
     };
   },
-  foto() {
-    const user = getAuth().currentUser;
-    const photoURL = user.photoURL;
-    return photoURL;
+  methods:{
+    guardar(){
+    const id = firebase.auth().currentUser.uid;
+    fb.updateUser(id, this.user);
+    },
   },
   created() {
     let user;
@@ -108,9 +106,7 @@ export default {
       user,
     };
   },
-  // guardar(){
-  //   localStorage.setItem("Twitter",userTwitter)
-  // },
+  
   // actualizar() {
   //   const id = firebase.auth().currentUser.uid;
   //   const db = firebase.firestore()
