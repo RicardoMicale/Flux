@@ -118,7 +118,19 @@ export default {
 <style lang="scss" scoped>
 @import "../variabes.scss";
 
+@keyframes fade-in-down{
+  from{
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
 .contenido {
+  animation: fade-in-down 1.5s;
+
   padding: 1.5rem 3rem;
 
   h1 {
