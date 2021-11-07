@@ -5,6 +5,7 @@
       <section class="info-contacto">
         <h2 class="nombre">{{ user.nombre }}</h2>
         <h3 class="carrera">{{ user.carrera }}</h3>
+        <img class="foto-perfil" :src="user.foto" alt="">
         <h3 class="contacto">Contacto:</h3>
         <div class="nombre-grande">
           <span>{{ user.nombre }}</span>
