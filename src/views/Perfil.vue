@@ -1,13 +1,14 @@
 <template>
   <div class="contenido">
-    <h1 class="titulo">Perfil</h1>
     <div class="info-estudiante">
       <section class="info-contacto">
         <div class="identificacion">
-          <h2 class="nombre">{{ user.nombre }}</h2>
-          <img class="foto-perfil" :src="user.foto" alt="">
+          <img class="foto-perfil" :src="user.foto" alt="" />
+          <div class="info-usuario">
+            <h2 class="nombre">{{ user.nombre }}</h2>
+            <h3 class="carrera">{{ user.carrera }}</h3>
+          </div>
         </div>
-        <h3 class="carrera">{{ user.carrera }}</h3>
         <h3 class="contacto subtitulo">Contacto:</h3>
         <div class="nombre-grande">
           <span>{{ user.nombre }}</span>
@@ -48,20 +49,20 @@
       </section>
       <section class="info-carrera">
         <h3 class="creditos subtitulo">Créditos:</h3>
-          <p>
-            Cantidad total de créditos acumulados:
-            <span>{{ user.creditosTot }}</span>
-          </p>
-          <p>
-            Cantidad de créditos en materias BP:
-            <span>{{ user.creditosBP }}</span>
-          </p>
-          <p>
-            Cantidad de créditos faltantes por cursar:
-            <span>
-              {{ user.creditosFaltantes }}
-            </span>
-          </p>
+        <p>
+          Cantidad total de créditos acumulados:
+          <span>{{ user.creditosTot }}</span>
+        </p>
+        <p>
+          Cantidad de créditos en materias BP:
+          <span>{{ user.creditosBP }}</span>
+        </p>
+        <p>
+          Cantidad de créditos faltantes por cursar:
+          <span>
+            {{ user.creditosFaltantes }}
+          </span>
+        </p>
       </section>
     </div>
   </div>
@@ -102,6 +103,7 @@ export default {
         this.$router.push("/");
       }
     });
+
     return {
       user,
     };
@@ -122,32 +124,32 @@ export default {
 <style lang="scss" scoped>
 @import "../variabes.scss";
 
-@keyframes fade-in-down{
-  from{
+@keyframes fade-in-down {
+  from {
     opacity: 0;
     transform: translateY(30px);
   }
-  to{
+  to {
     opacity: 1;
     transform: translateY(0px);
   }
 }
 
-@keyframes fade-form{
-  from{
+@keyframes fade-form {
+  from {
     background-color: $bg-secundario;
     border: none;
   }
-  to{
+  to {
     background-color: $input-bg-alt;
   }
 }
 
-@keyframes fade-label{
-  from{
+@keyframes fade-label {
+  from {
     background-color: $input-bg-alt;
   }
-  to{
+  to {
     background-color: $bg-secundario;
     border: none;
   }
@@ -155,7 +157,6 @@ export default {
 
 .contenido {
   animation: fade-in-down 1.5s;
-
   padding: 1.5rem 3rem;
 
   h1 {
@@ -164,43 +165,44 @@ export default {
 
   .info-estudiante {
     color: $font;
+
     a {
       color: $font;
       text-decoration: none;
     }
 
     .info-contacto {
-      margin: 2rem 2rem 1rem;
-
-      .nombre {
-        margin-bottom: 0.6rem;
-        font-size: 2rem;
-      }
-
-      .carrera{
-        font-size: 1.3rem;
-      }
+      margin: 2rem 0;
 
       h4,
       p {
         opacity: 0.8;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.4rem;
       }
-      .identificacion{
+
+      .identificacion {
         display: flex;
-        .nombre{
-          padding: 1rem;
+        align-items: flex-start;
+
+        .nombre {
+          font-size: 2rem;
         }
-        .foto-perfil{
-          padding-left: 1rem;
+
+        .carrera {
+          font-size: 1.4rem;
+        }
+
+        .info-usuario {
+          margin: 0 0.8rem;
         }
       }
     }
 
     .info-carrera {
-      margin: 2rem 2rem 1rem;
+      margin: 2rem 0;
+
       p {
-        margin: 0.3rem 0;
+        margin: 0.4rem 0;
 
         span {
           font-weight: bold;
@@ -208,13 +210,16 @@ export default {
       }
     }
   }
+
   .contacto {
-    padding: 1rem;
+    padding: 1rem 0;
   }
-  .creditos{
-    padding: 1rem;
+
+  .creditos {
+    padding: 1rem 0;
     margin-top: -1rem;
   }
+
   .lista-contacto {
     list-style-type: none;
 
@@ -223,6 +228,7 @@ export default {
       color: $bg-dark;
       font-family: $fonts;
       animation: fade-form 0.5s;
+
       &:disabled {
         animation: fade-label 0.5s;
         background: transparent;
@@ -232,6 +238,7 @@ export default {
       }
     }
   }
+
   .btn-editar {
     background-color: $acento;
     padding: 0.5rem 1rem;
@@ -243,6 +250,7 @@ export default {
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.2s;
+    margin: 0.8rem 0;
 
     &:hover {
       background-color: $button-press;
