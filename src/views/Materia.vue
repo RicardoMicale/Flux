@@ -299,6 +299,10 @@ h3 {
   margin: 5rem 0 0;
   font-size: 0.8rem;
   width: fit-content;
+
+  &:hover .fas {
+    animation: moverIzq 1s infinite ease alternate-reverse forwards;
+  }
 }
 
 .separador {
@@ -315,6 +319,10 @@ h3 {
 
   .fas {
     margin-left: 0.2rem;
+  }
+
+  &:hover .fas {
+    animation: moverDer 1s infinite ease alternate-reverse forwards;
   }
 }
 
