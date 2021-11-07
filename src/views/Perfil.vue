@@ -3,9 +3,11 @@
     <h1 class="titulo">Perfil</h1>
     <div class="info-estudiante">
       <section class="info-contacto">
-        <h2 class="nombre">{{ user.nombre }}</h2>
+        <div class="identificacion">
+          <h2 class="nombre">{{ user.nombre }}</h2>
+          <img class="foto-perfil" :src="user.foto" alt="">
+        </div>
         <h3 class="carrera">{{ user.carrera }}</h3>
-        <img class="foto-perfil" :src="user.foto" alt="">
         <h3 class="contacto">Contacto:</h3>
         <div class="nombre-grande">
           <span>{{ user.nombre }}</span>
@@ -124,7 +126,6 @@ export default {
 
   .info-estudiante {
     color: $font;
-
     a {
       color: $font;
       text-decoration: none;
@@ -141,6 +142,15 @@ export default {
       p {
         opacity: 0.8;
         margin-bottom: 0.2rem;
+      }
+      .identificacion{
+        display: flex;
+        .nombre{
+          padding: 1rem;
+        }
+        .foto-perfil{
+          padding-left: 1rem;
+        }
       }
     }
 
