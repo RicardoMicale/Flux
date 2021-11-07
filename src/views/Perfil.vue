@@ -17,20 +17,22 @@
           </li>
           <li>
             <p>
-              Twitter: @<input
+              Twitter: @<a :href="`https://www.twitter.com/${userTwitter}`" target="_blank" v-if="disabled"> {{userTwitter}} </a><input
                 class="red-input twitter"
                 type="text"
-                :disabled="disabled"
-              />
+                v-if="!disabled"
+                v-model="userTwitter"
+                :placeholder="userTwitter"/>
             </p>
           </li>
           <li>
             <p>
-              Instagram: @<input
+              Instagram: @<a :href="`https://www.instagram.com/${userInstagram}`" target="_blank" v-if="disabled"> {{userInstagram}} </a><input
                 class="red-input instagram"
                 type="text"
-                :disabled="disabled"
-              />
+                v-if="!disabled"
+                v-model="userInstagram"
+                :placeholder="userInstagram"/>
             </p>
           </li>
         </ul>
@@ -64,6 +66,7 @@
 <script>
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import { getAuth } from "firebase/auth";
 import "firebase/compat/firestore";
 import * as fb from "../firebase";
 
@@ -73,7 +76,14 @@ export default {
     return {
       user: {},
       disabled: true,
+      userTwitter: "",
+      userInstagram: "",
     };
+  },
+  foto() {
+    const user = getAuth().currentUser;
+    const photoURL = user.photoURL;
+    return photoURL;
   },
   created() {
     let user;
