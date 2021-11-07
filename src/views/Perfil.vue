@@ -47,7 +47,7 @@
       </button>
       </section>
       <section class="info-carrera">
-        <h3 class="contacto subtitulo">Créditos:</h3>
+        <h3 class="creditos subtitulo">Créditos:</h3>
           <p>
             Cantidad total de créditos acumulados:
             <span>{{ user.creditosTot }}</span>
@@ -147,8 +147,13 @@ export default {
     .info-contacto {
       margin: 2rem 2rem 1rem;
 
-      h2 {
+      .nombre {
         margin-bottom: 0.6rem;
+        font-size: 2rem;
+      }
+
+      .carrera{
+        font-size: 1.3rem;
       }
 
       h4,
@@ -180,6 +185,10 @@ export default {
   }
   .contacto {
     padding: 1rem;
+  }
+  .creditos{
+    padding: 1rem;
+    margin-top: -1rem;
   }
   .lista-contacto {
     list-style-type: none;
