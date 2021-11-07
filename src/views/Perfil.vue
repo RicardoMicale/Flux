@@ -128,6 +128,27 @@ export default {
     transform: translateY(0px);
   }
 }
+
+@keyframes fade-form{
+  from{
+    background-color: $bg-secundario;
+    border: none;
+  }
+  to{
+    background-color: $input-bg-alt;
+  }
+}
+
+@keyframes fade-label{
+  from{
+    background-color: $input-bg-alt;
+  }
+  to{
+    background-color: $bg-secundario;
+    border: none;
+  }
+}
+
 .contenido {
   animation: fade-in-down 1.5s;
 
@@ -197,8 +218,9 @@ export default {
       background-color: $input-bg-alt;
       color: $bg-dark;
       font-family: $fonts;
-
+      animation: fade-form 0.5s;
       &:disabled {
+        animation: fade-label 0.5s;
         background: transparent;
         border: none;
         outline: none;
