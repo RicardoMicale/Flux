@@ -7,14 +7,14 @@
       </div>
     </router-link>
     <div class="acciones">
-      <font-awesome-icon icon="eye" class="fas"></font-awesome-icon>
+      <font-awesome-icon icon="eye" class="fas clickeable"></font-awesome-icon>
       <font-awesome-icon
         icon="check"
-        class="fas"
+        class="fas clickeable"
         @click="materiaPasada()"
         :class="pasada || lista ? 'pasada' : ''"
       ></font-awesome-icon>
-      <font-awesome-icon icon="circle" class="fas"></font-awesome-icon>
+      <!-- <font-awesome-icon icon="circle" class="fas"></font-awesome-icon> -->
     </div>
   </div>
 </template>
@@ -124,5 +124,9 @@ export default {
 
 .materia-pasada {
   opacity: 0.7;
+}
+
+.clickeable {
+  cursor: pointer;
 }
 </style>
