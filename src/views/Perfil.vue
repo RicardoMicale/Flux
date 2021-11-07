@@ -42,7 +42,7 @@
         <button class="btn-editar" @click="disabled = !disabled" v-if="disabled">
         Editar Redes
       </button>
-      <button class="btn-editar" @click="disabled = !disabled" v-else>
+      <button class="btn-editar" @click="disabled=!disabled" v-else>
         Guardar Cambios
       </button>
       </section>
@@ -108,10 +108,18 @@ export default {
       user,
     };
   },
-  editar() {
-    this.disabled = !this.disabled;
-    this.UsuarioService.updateUser(this.user.uid, this.user);
-  },
+  // guardar(){
+  //   localStorage.setItem("Twitter",userTwitter)
+  // },
+  // actualizar() {
+  //   const id = firebase.auth().currentUser.uid;
+  //   const db = firebase.firestore()
+  //   var userRef = db.collection("Usuarios").doc(id)
+  //   var mergear = userRef.set({
+  //     twitterUser: data().userTwitter
+  //   })
+  //   return mergear;
+  //   },
 };
 </script>
 
