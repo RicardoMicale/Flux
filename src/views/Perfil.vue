@@ -3,9 +3,12 @@
     <h1 class="titulo">Perfil</h1>
     <div class="info-estudiante">
       <section class="info-contacto">
-        <h2 class="nombre">{{ user.nombre }}</h2>
+        <div class="identificacion">
+          <h2 class="nombre">{{ user.nombre }}</h2>
+          <img class="foto-perfil" :src="user.foto" alt="">
+        </div>
         <h3 class="carrera">{{ user.carrera }}</h3>
-        <h3 class="contacto">Contacto:</h3>
+        <h3 class="contacto subtitulo">Contacto:</h3>
         <div class="nombre-grande">
           <span>{{ user.nombre }}</span>
         </div>
@@ -17,46 +20,49 @@
           </li>
           <li>
             <p>
-              Twitter: @<input
+              Twitter: @<a :href="`https://www.twitter.com/${userTwitter}`" target="_blank" v-if="disabled"> {{userTwitter}} </a><input
                 class="red-input twitter"
                 type="text"
-                :disabled="disabled"
-              />
+                v-if="!disabled"
+                v-model="userTwitter"
+                :placeholder="userTwitter"/>
             </p>
           </li>
           <li>
             <p>
-              Instagram: @<input
+              Instagram: @<a :href="`https://www.instagram.com/${userInstagram}`" target="_blank" v-if="disabled"> {{userInstagram}} </a><input
                 class="red-input instagram"
                 type="text"
-                :disabled="disabled"
-              />
+                v-if="!disabled"
+                v-model="userInstagram"
+                :placeholder="userInstagram"/>
             </p>
           </li>
         </ul>
-      </section>
-      <section class="info-carrera">
-        <p>
-          Cantidad total de créditos acumulados:
-          <span>{{ user.creditosTot }}</span>
-        </p>
-        <p>
-          Cantidad de créditos en materias BP:
-          <span>{{ user.creditosBP }}</span>
-        </p>
-        <p>
-          Cantidad de créditos faltantes por cursar:
-          <span>
-            {{ user.creditosFaltantes }}
-          </span>
-        </p>
-      </section>
-      <button class="btn-editar" @click="disabled = !disabled" v-if="disabled">
-        Editar Contacto
+        <button class="btn-editar" @click="disabled = !disabled" v-if="disabled">
+        Editar Redes
       </button>
-      <button class="btn-editar" @click="disabled = !disabled" v-else>
+      <button class="btn-editar" @click="disabled=!disabled" v-else>
         Guardar Cambios
       </button>
+      </section>
+      <section class="info-carrera">
+        <h3 class="creditos subtitulo">Créditos:</h3>
+          <p>
+            Cantidad total de créditos acumulados:
+            <span>{{ user.creditosTot }}</span>
+          </p>
+          <p>
+            Cantidad de créditos en materias BP:
+            <span>{{ user.creditosBP }}</span>
+          </p>
+          <p>
+            Cantidad de créditos faltantes por cursar:
+            <span>
+              {{ user.creditosFaltantes }}
+            </span>
+          </p>
+      </section>
     </div>
   </div>
 </template>
@@ -64,6 +70,7 @@
 <script>
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import { getAuth } from "firebase/auth";
 import "firebase/compat/firestore";
 import * as fb from "../firebase";
 
@@ -73,7 +80,14 @@ export default {
     return {
       user: {},
       disabled: true,
+      userTwitter: "",
+      userInstagram: "",
     };
+  },
+  foto() {
+    const user = getAuth().currentUser;
+    const photoURL = user.photoURL;
+    return photoURL;
   },
   created() {
     let user;
@@ -94,17 +108,58 @@ export default {
       user,
     };
   },
-  editar() {
-    this.disabled = !this.disabled;
-    this.UsuarioService.updateUser(this.user.uid, this.user);
-  },
+  // guardar(){
+  //   localStorage.setItem("Twitter",userTwitter)
+  // },
+  // actualizar() {
+  //   const id = firebase.auth().currentUser.uid;
+  //   const db = firebase.firestore()
+  //   var userRef = db.collection("Usuarios").doc(id)
+  //   var mergear = userRef.set({
+  //     twitterUser: data().userTwitter
+  //   })
+  //   return mergear;
+  //   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../variabes.scss";
 
+@keyframes fade-in-down{
+  from{
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade-form{
+  from{
+    background-color: $bg-secundario;
+    border: none;
+  }
+  to{
+    background-color: $input-bg-alt;
+  }
+}
+
+@keyframes fade-label{
+  from{
+    background-color: $input-bg-alt;
+  }
+  to{
+    background-color: $bg-secundario;
+    border: none;
+  }
+}
+
 .contenido {
+  animation: fade-in-down 1.5s;
+
   padding: 1.5rem 3rem;
 
   h1 {
@@ -113,7 +168,6 @@ export default {
 
   .info-estudiante {
     color: $font;
-
     a {
       color: $font;
       text-decoration: none;
@@ -122,14 +176,28 @@ export default {
     .info-contacto {
       margin: 2rem 2rem 1rem;
 
-      h2 {
+      .nombre {
         margin-bottom: 0.6rem;
+        font-size: 2rem;
+      }
+
+      .carrera{
+        font-size: 1.3rem;
       }
 
       h4,
       p {
         opacity: 0.8;
         margin-bottom: 0.2rem;
+      }
+      .identificacion{
+        display: flex;
+        .nombre{
+          padding: 1rem;
+        }
+        .foto-perfil{
+          padding-left: 1rem;
+        }
       }
     }
 
@@ -147,6 +215,10 @@ export default {
   .contacto {
     padding: 1rem;
   }
+  .creditos{
+    padding: 1rem;
+    margin-top: -1rem;
+  }
   .lista-contacto {
     list-style-type: none;
 
@@ -154,8 +226,9 @@ export default {
       background-color: $input-bg-alt;
       color: $bg-dark;
       font-family: $fonts;
-
+      animation: fade-form 0.5s;
       &:disabled {
+        animation: fade-label 0.5s;
         background: transparent;
         border: none;
         outline: none;
