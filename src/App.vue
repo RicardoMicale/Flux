@@ -44,4 +44,22 @@ body {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+@keyframes moverIzq {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-0.5rem);
+  }
+}
+
+@keyframes moverDer {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(0.5rem);
+  }
+}
 </style>

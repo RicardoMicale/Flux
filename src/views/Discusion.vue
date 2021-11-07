@@ -145,6 +145,10 @@ h1 {
 
   &:hover {
     color: $font-secundario;
+
+    .fas {
+      animation: moverIzq 1s infinite ease alternate-reverse forwards;
+    }
   }
 }
 </style>
