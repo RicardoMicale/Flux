@@ -8,7 +8,7 @@
           <img class="foto-perfil" :src="user.foto" alt="">
         </div>
         <h3 class="carrera">{{ user.carrera }}</h3>
-        <h3 class="contacto">Contacto:</h3>
+        <h3 class="contacto subtitulo">Contacto:</h3>
         <div class="nombre-grande">
           <span>{{ user.nombre }}</span>
         </div>
@@ -39,29 +39,30 @@
             </p>
           </li>
         </ul>
-      </section>
-      <section class="info-carrera">
-        <p>
-          Cantidad total de créditos acumulados:
-          <span>{{ user.creditosTot }}</span>
-        </p>
-        <p>
-          Cantidad de créditos en materias BP:
-          <span>{{ user.creditosBP }}</span>
-        </p>
-        <p>
-          Cantidad de créditos faltantes por cursar:
-          <span>
-            {{ user.creditosFaltantes }}
-          </span>
-        </p>
-      </section>
-      <button class="btn-editar" @click="disabled = !disabled" v-if="disabled">
-        Editar Contacto
+        <button class="btn-editar" @click="disabled = !disabled" v-if="disabled">
+        Editar Redes
       </button>
       <button class="btn-editar" @click="disabled = !disabled" v-else>
         Guardar Cambios
       </button>
+      </section>
+      <section class="info-carrera">
+        <h3 class="contacto subtitulo">Créditos:</h3>
+          <p>
+            Cantidad total de créditos acumulados:
+            <span>{{ user.creditosTot }}</span>
+          </p>
+          <p>
+            Cantidad de créditos en materias BP:
+            <span>{{ user.creditosBP }}</span>
+          </p>
+          <p>
+            Cantidad de créditos faltantes por cursar:
+            <span>
+              {{ user.creditosFaltantes }}
+            </span>
+          </p>
+      </section>
     </div>
   </div>
 </template>
