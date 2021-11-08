@@ -23,6 +23,7 @@
           class="fas"
         ></font-awesome-icon>
       </button>
+      <Comentar v-if="agregar" />
       <section class="comentarios">
         <div class="comentario" v-for="comment in comments" :key="comment.id">
           <Comentario :comment="comment" />
@@ -36,11 +37,13 @@
 import Comentario from "../components/Comentario.vue";
 import * as fb from "../firebase";
 import { useRoute } from "vue-router";
+import Comentar from "../components/Comentar.vue";
 
 export default {
   name: "Discusion",
   components: {
     Comentario,
+    Comentar,
   },
   data() {
     return {
@@ -64,15 +67,17 @@ export default {
         this.materia.discusion = idDiscusion;
         fb.updateMateria(idMateria, this.materia);
       } else {
-        fb.getDiscusion(idDiscusion).then((response) => {
-          this.comments = response.data().comentarios;
+        fb.getDiscusionDinamica(idDiscusion).then((res) => {
+          res.onSnapshot((snap) => {
+            this.comments = snap.data().comentarios;
+          });
         });
       }
     });
   },
   methods: {
     aggComment() {
-      this.false = !this.false;
+      this.agregar = !this.agregar;
     },
   },
 };
@@ -92,6 +97,10 @@ export default {
 .informacion {
   width: 30%;
   color: $font;
+
+  h2 {
+    width: 90%;
+  }
 
   h4 {
     opacity: 0.7;

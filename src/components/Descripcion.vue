@@ -9,7 +9,7 @@
       <form @submit.prevent="agregar()">
         <label for="descripcion">Descripcion</label>
         <textarea
-          name="descripcio"
+          name="descripcion"
           cols="30"
           rows="10"
           placeholder="Introduzca la descripcion de la materia"

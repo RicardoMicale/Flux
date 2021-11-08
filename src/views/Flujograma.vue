@@ -112,7 +112,7 @@ export default {
       });
     },
   },
-  mounted() {
+  beforeMount() {
     this.getMaterias().then((res) => {
       this.trimestres = res;
     });
