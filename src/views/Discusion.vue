@@ -23,7 +23,7 @@
           class="fas"
         ></font-awesome-icon>
       </button>
-      <Comentar v-if="agregar" :codigo="this.$route.params.id" />
+      <Comentar v-if="agregar" />
       <section class="comentarios">
         <div class="comentario" v-for="comment in comments" :key="comment.id">
           <Comentario :comment="comment" />

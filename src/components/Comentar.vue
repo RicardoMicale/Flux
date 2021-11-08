@@ -24,9 +24,6 @@ export default {
       comentario: "",
     };
   },
-  props: {
-    codigo: String,
-  },
   methods: {
     nuevoComment(nombre, id, indice) {
       const comment = {
@@ -48,8 +45,9 @@ export default {
       } else {
         const user = firebase.auth().currentUser;
         let discusion;
+        const codigo = this.$route.params.id;
 
-        fb.getDiscusion(this.codigo).then((res) => {
+        fb.getDiscusion(codigo).then((res) => {
           discusion = res.data();
           const comentarioNuevo = this.nuevoComment(
             user.displayName,
@@ -57,7 +55,7 @@ export default {
             discusion.comentarios.length
           );
           discusion.comentarios.push(comentarioNuevo);
-          fb.updateDiscusion(this.codigo, discusion);
+          fb.updateDiscusion(codigo, discusion);
           this.comentario = "";
         });
       }
