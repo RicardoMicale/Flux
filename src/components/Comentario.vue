@@ -1,10 +1,44 @@
 <template>
   <div v-if="comment" class="comment-container">
     <div class="header">
-      <img :src="usuario.foto" alt="foto usuario" />
-      <div class="info">
-        <h3>{{ usuario.nombre }}</h3>
-        <p>{{ usuario.carrera }}</p>
+      <div class="usuario">
+        <img :src="usuario.foto" alt="foto usuario" />
+        <div class="info">
+          <h3>{{ usuario.nombre }}</h3>
+          <p>{{ usuario.carrera }}</p>
+        </div>
+      </div>
+      <div class="redes">
+        <a :href="'mailto:' + usuario.email" target="_blank">
+          <font-awesome-icon
+            icon="envelope"
+            class="fas mail"
+          ></font-awesome-icon>
+        </a>
+        <a
+          :href="`https://www.twitter.com/${
+            usuario.twitter ? usuario.twitter : ''
+          }`"
+          target="_blank"
+          v-if="usuario.twitter"
+        >
+          <font-awesome-icon
+            :icon="['fab', 'twitter']"
+            class="fas twitter"
+          ></font-awesome-icon>
+        </a>
+        <a
+          :href="`https://www.instagram.com/${
+            usuario.instagram ? usuario.instagram : ''
+          }`"
+          target="_blank"
+          v-if="usuario.instagram"
+        >
+          <font-awesome-icon
+            :icon="['fab', 'instagram']"
+            class="fas instagram"
+          ></font-awesome-icon>
+        </a>
       </div>
     </div>
     <p>{{ comment.comentario }}</p>
@@ -53,9 +87,40 @@ div {
 
   .header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+
+    .usuario {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .redes {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        text-decoration: none;
+        color: $font;
+        margin: 0 0.3rem;
+        font-size: 1.3rem;
+      }
+
+      .twitter:hover {
+        color: $twitter;
+      }
+
+      .instagram:hover {
+        color: $instagram;
+      }
+
+      .mail:hover {
+        color: $mail;
+      }
+    }
 
     img {
       border-radius: 50%;
