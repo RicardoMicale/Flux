@@ -10,8 +10,10 @@ import {
     faAngleLeft, 
     faExternalLinkAlt, 
     faPlus, 
-    faTimes 
+    faTimes,
+    faEnvelope
 } from '@fortawesome/free-solid-svg-icons';
+import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faAngleRight);
@@ -21,7 +23,10 @@ library.add(faCircle);
 library.add(faAngleLeft);
 library.add(faExternalLinkAlt);
 library.add(faPlus);
-library.add(faTimes)
+library.add(faTimes);
+library.add(faEnvelope);
+library.add(faTwitter);
+library.add(faInstagram);
 
 createApp(App)
     .component('font-awesome-icon', FontAwesomeIcon)
