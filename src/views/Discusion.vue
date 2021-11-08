@@ -98,6 +98,10 @@ export default {
   width: 30%;
   color: $font;
 
+  h2 {
+    width: 90%;
+  }
+
   h4 {
     opacity: 0.7;
     margin: 1rem 0 3rem;
