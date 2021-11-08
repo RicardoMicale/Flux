@@ -72,6 +72,11 @@ export const getDiscusion = async (idDiscusion) => {
     return discusion;
 }
 
+export const getDiscusionDinamica = async id => {
+    const discusion = await coleccionDiscusiones.doc(id)
+    return discusion
+}
+
 export const updateDiscusion = (id, discusion) => {
     return coleccionDiscusiones.doc(id).update(discusion);
 }
