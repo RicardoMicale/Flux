@@ -1,6 +1,25 @@
 <template>
   <h2>Flujograma</h2>
   <div class="flujograma">
+    <div class="leyenda">
+      <h4>Leyenda</h4>
+      <p class="item-leyenda">
+        <font-awesome-icon icon="check" class="fas"></font-awesome-icon>
+        Marcar como pasada
+      </p>
+      <p class="item-leyenda">
+        <font-awesome-icon icon="check" class="fas check"></font-awesome-icon>
+        Materia pasada
+      </p>
+      <p class="item-leyenda">
+        <font-awesome-icon icon="eye" class="fas"></font-awesome-icon> Marcar
+        como en curso
+      </p>
+      <p class="item-leyenda">
+        <font-awesome-icon icon="eye" class="fas eye"></font-awesome-icon>
+        Materia en curso
+      </p>
+    </div>
     <section class="info-carrera">
       <p>
         Cantidad total de créditos acumulados:
@@ -98,16 +117,17 @@ export default {
         return;
       }
       const idActual = firebase.auth().currentUser.uid;
-      let user;
 
-      await fb.getUsuario(idActual).then((res) => {
-        user = res.data();
-        this.materias.forEach((materia) => {
-          if (user.materiasCursadas.includes(materia.codigo)) {
-            materia.pasada = true;
-          } else {
-            materia.pasada = false;
-          }
+      await fb.getUsuarioDinamico(idActual).then((res) => {
+        res.onSnapshot((snap) => {
+          this.user = snap.data();
+          this.materias.forEach((materia) => {
+            if (this.user.materiasCursadas.includes(materia.codigo)) {
+              materia.pasada = true;
+            } else {
+              materia.pasada = false;
+            }
+          });
         });
       });
     },
@@ -116,22 +136,6 @@ export default {
     this.getMaterias().then((res) => {
       this.trimestres = res;
     });
-
-    let user;
-
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        await fb
-          .getUsuario(user.uid)
-          .then((response) => {
-            this.user = response.data();
-          })
-          .catch((err) => console.log(err));
-      }
-    });
-    return {
-      user,
-    };
   },
 };
 </script>
@@ -162,8 +166,29 @@ h2 {
   width: 80%;
   display: flex;
   justify-content: space-between;
-  margin-left: -67px;
+  margin-left: -4rem;
+  margin-top: 1rem;
   padding-bottom: 1rem;
-  font-size: 17px;
+  font-size: 1rem;
+}
+
+.leyenda {
+  margin-bottom: 1rem;
+  color: $font;
+  width: 100%;
+  padding: 0 3rem;
+
+  .item-leyenda {
+    color: $font;
+    margin: 0.3rem 0;
+
+    .check {
+      color: $materia-pasada;
+    }
+
+    .eye {
+      color: $materia-actual;
+    }
+  }
 }
 </style>
