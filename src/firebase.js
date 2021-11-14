@@ -58,6 +58,11 @@ export const getUsuario = async id => {
     return user;
 }
 
+export const getUsuarioDinamico = async id => {
+    const user = await coleccionUsuarios.doc(id)
+    return user
+}
+
 export const updateUser = (id, user) => {
     return coleccionUsuarios.doc(id).update(user)
 }

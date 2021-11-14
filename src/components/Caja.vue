@@ -7,10 +7,10 @@
       </div>
     </router-link>
     <div class="acciones">
-      <font-awesome-icon icon="eye" class="fas clickeable"></font-awesome-icon>
+      <font-awesome-icon icon="eye" class="fas ojo"></font-awesome-icon>
       <font-awesome-icon
         icon="check"
-        class="fas clickeable"
+        class="fas check"
         @click="materiaPasada()"
         :class="pasada || lista ? 'pasada' : ''"
       ></font-awesome-icon>
@@ -74,6 +74,7 @@ export default {
 .link-materia {
   text-decoration: none;
   color: $font;
+  width: 80%;
 }
 
 .contenido {
@@ -102,8 +103,13 @@ export default {
   height: 100%;
   color: $font;
 
-  .fas:not(:last-child) {
+  .fas {
     cursor: pointer;
+    font-size: 1.2rem;
+  }
+
+  .check:hover {
+    color: $check-hover;
   }
 }
 
@@ -124,6 +130,10 @@ export default {
 
 .materia-pasada {
   opacity: 0.7;
+
+  .check:hover {
+    color: $materia-pasada;
+  }
 }
 
 .clickeable {
