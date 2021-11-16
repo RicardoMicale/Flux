@@ -6,6 +6,7 @@
         :codigo="materia.codigo"
         :nombre="materia.nombre"
         :pasada="materia.pasada"
+        :enCurso="materia.enCurso"
       />
     </div>
   </div>
