@@ -10,9 +10,9 @@
           </div>
         </div>
         <h3 class="contacto subtitulo">Contacto:</h3>
-        <div class="nombre-grande">
+        <!-- <div class="nombre-grande">
           <span>{{ user.nombre }}</span>
-        </div>
+        </div> -->
         <ul class="lista-contacto">
           <li>
             <p>
@@ -21,31 +21,56 @@
           </li>
           <li>
             <p>
-              Twitter: @<a :href="`https://www.twitter.com/${user.twitter}`" target="_blank" v-if="disabled"> {{ user.twitter ? user.twitter : '' }} </a><input
+              Twitter: @<a
+                :href="`https://www.twitter.com/${user.twitter}`"
+                target="_blank"
+                v-if="disabled"
+              >
+                {{ user.twitter ? user.twitter : "" }} </a
+              ><input
                 class="red-input twitter"
                 type="text"
                 v-if="!disabled"
                 v-model="user.twitter"
-                :placeholder="user.twitter"/>
+                :placeholder="user.twitter"
+              />
             </p>
           </li>
           <li>
             <p>
-              Instagram: @<a :href="`https://www.instagram.com/${user.instagram}`" target="_blank" v-if="disabled"> {{ user.instagram ? user.instagram : '' }}  </a><input
+              Instagram: @<a
+                :href="`https://www.instagram.com/${user.instagram}`"
+                target="_blank"
+                v-if="disabled"
+              >
+                {{ user.instagram ? user.instagram : "" }} </a
+              ><input
                 class="red-input instagram"
                 type="text"
                 v-if="!disabled"
                 v-model="user.instagram"
-                :placeholder="user.instagram"/>
+                :placeholder="user.instagram"
+              />
             </p>
           </li>
         </ul>
-        <button class="btn-editar" @click="disabled = !disabled" v-if="disabled">
-        Editar Redes
-      </button>
-      <button class="btn-editar" @click="disabled=!disabled; guardar()" v-else>
-        Guardar Cambios
-      </button>
+        <button
+          class="btn-editar"
+          @click="disabled = !disabled"
+          v-if="disabled"
+        >
+          Editar Redes
+        </button>
+        <button
+          class="btn-editar"
+          @click="
+            disabled = !disabled;
+            guardar();
+          "
+          v-else
+        >
+          Guardar Cambios
+        </button>
       </section>
       <section class="info-carrera">
         <h3 class="creditos subtitulo">Créditos:</h3>
@@ -65,6 +90,14 @@
         </p>
       </section>
     </div>
+    <div class="separador"></div>
+    <div class="trim-actual">
+      <h2>Trimestre actual</h2>
+      <Curso />
+      <router-link to="/editar_trimestre">
+        <button class="btn-trim">Editar trimestre</button>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -73,19 +106,23 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import * as fb from "../firebase";
+import Curso from "../components/Curso.vue";
 
 export default {
   name: "Perfil",
+  components: {
+    Curso,
+  },
   data() {
     return {
       user: {},
       disabled: true,
     };
   },
-  methods:{
-    guardar(){
-    const id = firebase.auth().currentUser.uid;
-    fb.updateUser(id, this.user);
+  methods: {
+    guardar() {
+      const id = firebase.auth().currentUser.uid;
+      fb.updateUser(id, this.user);
     },
   },
   created() {
@@ -108,16 +145,6 @@ export default {
       user,
     };
   },
-  
-  // actualizar() {
-  //   const id = firebase.auth().currentUser.uid;
-  //   const db = firebase.firestore()
-  //   var userRef = db.collection("Usuarios").doc(id)
-  //   var mergear = userRef.set({
-  //     twitterUser: data().userTwitter
-  //   })
-  //   return mergear;
-  //   },
 };
 </script>
 
@@ -157,7 +184,10 @@ export default {
 
 .contenido {
   animation: fade-in-down 1.5s;
-  padding: 1.5rem 3rem;
+  padding: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 
   h1 {
     color: $font;
@@ -165,6 +195,7 @@ export default {
 
   .info-estudiante {
     color: $font;
+    width: 50%;
 
     a {
       color: $font;
@@ -172,8 +203,6 @@ export default {
     }
 
     .info-contacto {
-      margin: 2rem 0;
-
       h4,
       p {
         opacity: 0.8;
@@ -278,6 +307,40 @@ export default {
       color: $bg-secundario;
       opacity: 0.6;
       z-index: -1;
+    }
+  }
+}
+
+.separador {
+  width: 0.5rem;
+  height: 30rem;
+  background-color: $acento;
+  margin-right: 1.5rem;
+  border-radius: 50000px;
+}
+
+.trim-actual {
+  color: $font;
+  width: 40%;
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-trim {
+    padding: 0.5rem 1rem;
+    background-color: $acento;
+    color: $font;
+    font-family: $fonts;
+    border: none;
+    outline: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-top: 2rem;
+
+    &:hover {
+      background-color: $button-press;
+      color: $input-bg-alt;
     }
   }
 }
