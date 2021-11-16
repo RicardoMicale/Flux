@@ -36,11 +36,10 @@ export default {
 
       await fb.getUsuario(idUser).then((res) => {
         user = res.data();
-      });
-
-      user.trimestreActual.forEach((materia) => {
-        fb.getMateria(materia).then((res) => {
-          this.materias.push(res.data());
+        user.trimestreActual.forEach((materia) => {
+          fb.getMateria(materia).then((res) => {
+            this.materias.push(res.data());
+          });
         });
       });
     },
