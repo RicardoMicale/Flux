@@ -1,6 +1,7 @@
 <template>
   <div class="editar-view">
     <div class="busqueda">
+      <h3>Buscar materias</h3>
       <form @submit.prevent="buscar()" class="search">
         <div class="barra">
           <label for="nombre">Nombre de la materia</label>
@@ -20,15 +21,28 @@
           v-for="materia in busqueda"
           :key="materia.codigo"
           :materia="materia"
+          :inscrita="false"
         />
       </div>
     </div>
+    <section class="inscritas">
+      <h3>Asignaturas inscritas</h3>
+      <div class="materias-inscritas">
+        <Materia
+          class="materia"
+          v-for="materia in actuales"
+          :key="materia.codigo"
+          :materia="materia"
+          :inscrita="true"
+        />
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
 import Materia from "../components/Materia.vue";
-// import firebase from "firebase/compat/app";
+import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import * as fb from "../firebase";
@@ -43,6 +57,8 @@ export default {
       materias: [],
       busqueda: [],
       nombre: "",
+      actuales: [],
+      user: {},
     };
   },
   methods: {
@@ -60,9 +76,25 @@ export default {
         }
       });
     },
+    async getUser() {
+      const userId = firebase.auth().currentUser.uid;
+
+      await fb.getUsuarioDinamico(userId).then((res) => {
+        res.onSnapshot((snap) => {
+          this.user = snap.data();
+          this.actuales = [];
+          this.user.trimestreActual.forEach((materia) => {
+            fb.getMateria(materia).then((res) => {
+              this.actuales.push(res.data());
+            });
+          });
+        });
+      });
+    },
   },
   beforeMount() {
     this.getMaterias();
+    this.getUser();
   },
 };
 </script>
@@ -72,10 +104,18 @@ export default {
 
 .editar-view {
   padding: 3rem;
+  display: flex;
+  align-items: flex-start;
+
+  h3 {
+    color: $font;
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+  }
 }
 
 .search {
-  width: 40%;
+  width: 50%;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -112,10 +152,15 @@ export default {
 
     input {
       width: 18rem;
+
       &:focus {
         border: 1px solid $acento;
       }
     }
   }
+}
+
+.inscritas {
+  margin-left: 10%;
 }
 </style>

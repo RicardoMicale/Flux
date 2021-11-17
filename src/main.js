@@ -11,7 +11,8 @@ import {
     faExternalLinkAlt, 
     faPlus, 
     faTimes,
-    faEnvelope
+    faEnvelope,
+    faMinus
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faTwitter,
@@ -22,7 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(
     faAngleRight, faEye, faCheck, faCircle, faAngleLeft, 
     faExternalLinkAlt, faPlus, faTimes, faEnvelope, 
-    faTwitter, faInstagram
+    faTwitter, faInstagram, faMinus
     );
 // library.add(faEye);
 // library.add(faCheck);
