@@ -121,13 +121,19 @@ export default {
   },
   methods: {
     guardar() {
+      //Se guardan los datos del usuario al presionar el boton
+
       const id = firebase.auth().currentUser.uid;
       fb.updateUser(id, this.user);
     },
   },
   created() {
     let user;
-
+    /* 
+    Se busca que haya un usuario con sesion activa
+    Si existe, se define el usaurio actual como el que se encontro
+    Sino, se devuelve al inicio de la pagina
+    */
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         await fb

@@ -37,9 +37,10 @@ export default {
   },
   methods: {
     agregar() {
+      //Se busca el codigo de la materia
       const codigo = this.codigo;
-      console.log(codigo, this.codigo);
 
+      //Se busca la materia en la bd, se agrega la descripcion y se actualiza el objeto en la bd
       fb.getMateria(codigo).then((res) => {
         const materia = res.data();
         materia.descripcion = this.descrip;

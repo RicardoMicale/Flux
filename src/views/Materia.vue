@@ -116,6 +116,7 @@ export default {
   mounted() {
     this.getMateriaActual();
   },
+  //Se mantiene un watcher para cuando cambie la ruta se cambia el codigo de la materia actual
   watch: {
     "$route.path": function () {
       this.getMateriaActual();
@@ -130,27 +131,7 @@ export default {
       this.codigo = "";
     },
     getMateriaActual() {
-      const idMateria = this.$route.params.id;
-
-      // fb.getMateria(idMateria).then((res) => {
-      //   this.materia = res.data();
-      //   this.codigo = this.materia.codigo;
-      //   this.materia.prelatorias.forEach((prelatoria) => {
-      //     fb.getMateria(prelatoria).then((res) => {
-      //       this.prelatorias.push({
-      //         codigo: res.data().codigo,
-      //         nombre: res.data().nombre,
-      //       });
-      //     });
-      //   });
-      //   if (this.materia.discusion !== "Por definir") {
-      //     fb.getDiscusion(this.materia.codigo + "D").then((res) => {
-      //       if (res.data().comentarios.length > 0) {
-      //         this.comment = res.data().comentarios[0];
-      //       }
-      //     });
-      //   }
-      // });
+      const idMateria = this.$route.params.id; //Id de la materia actual desde el url
 
       fb.getMateriaDinamica(idMateria).then((res) => {
         res.onSnapshot((snap) => {

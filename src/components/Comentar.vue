@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     nuevoComment(nombre, id, indice) {
+      //Crea un nuevo comentario como objeto
       const comment = {
         nombre: nombre,
         id: id,
@@ -36,6 +37,14 @@ export default {
       return comment;
     },
     comentar() {
+      /* 
+      Si no hay una sesion activa, muestra un aviso y termina la funcion
+      Si no hay nada escrito, muesta un aviso y termina la funcion
+      Finalmente, se busca el usuario actual y el codigo de la discusion para crear el objeto comentario nuevo
+      Se agrega el comentario a la discusion y se actualiza en la base de datos
+      Se vacia el campo para escribir otro comentario
+      */
+
       if (firebase.auth().currentUser === null) {
         alert("Debes iniciar sesion para comentar");
         return;

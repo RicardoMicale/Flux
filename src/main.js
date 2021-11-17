@@ -25,16 +25,6 @@ library.add(
     faExternalLinkAlt, faPlus, faTimes, faEnvelope, 
     faTwitter, faInstagram, faMinus
     );
-// library.add(faEye);
-// library.add(faCheck);
-// library.add(faCircle);
-// library.add(faAngleLeft);
-// library.add(faExternalLinkAlt);
-// library.add(faPlus);
-// library.add(faTimes);
-// library.add(faEnvelope);
-// library.add(faTwitter);
-// library.add(faInstagram);
 
 createApp(App)
     .component('font-awesome-icon', FontAwesomeIcon)

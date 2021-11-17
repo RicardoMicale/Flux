@@ -54,12 +54,19 @@ export default {
   },
   created() {
     const route = useRoute();
-    const idDiscusion = route.params.id;
-    const idMateria = idDiscusion.slice(0, -1);
+    const idDiscusion = route.params.id; //Id de la discusion tomado de la url
+    const idMateria = idDiscusion.slice(0, -1); //El id de la discusion es igual al de la materia con una D al final
+    //Se crea un objeto discusion con una lista de comentarios vacia para crear el objeto en la coleccion
     const discusion = {
       comentarios: [],
     };
 
+    /* 
+    Se buscan las materias segun su id
+    Si todavia no exixte la discusion se crea
+    Si ya existe se busca la discusion
+    Se accede a sus comentarios para mostrarlos en pantalla
+    */
     fb.getMateria(idMateria).then((res) => {
       this.materia = res.data();
       if (this.materia.discusion === "Por definir") {
@@ -77,6 +84,7 @@ export default {
   },
   methods: {
     aggComment() {
+      //Se usa para abrir el form para agregar comentarios
       this.agregar = !this.agregar;
     },
   },

@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     async getUser() {
+      //Busca el usuario actual
       await fb.getUsuarioDinamico(this.userId).then((res) => {
         res.onSnapshot((snap) => {
           this.user = snap.data();
@@ -49,6 +50,10 @@ export default {
       });
     },
     agregarMateria() {
+      /* 
+      Si el usuario ya agrego esta materia muestra un aviso y termina la funcion
+      De lo contrario, se agrega el codigo de la materia al usuario bd y se actualiza en la bd
+      */
       if (this.user.trimestreActual.includes(this.materia.codigo)) {
         alert("Esta materia ya esta inscrita");
         return;
@@ -58,8 +63,10 @@ export default {
       fb.updateUser(this.userId, this.user);
     },
     eliminarMateria() {
+      //Se busca el indice de la materia en la lista de materias en curso
       const index = this.user.trimestreActual.indexOf(this.materia.codigo);
 
+      //Se elimina el elemento de la lista en esa posicion
       this.user.trimestreActual.splice(index, 1);
       fb.updateUser(this.userId, this.user);
     },

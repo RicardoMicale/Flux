@@ -2,12 +2,18 @@
   <section class="materias">
     <div class="informacion" v-for="materia in materias" :key="materia.codigo">
       <div class="datos-materia">
-        <router-link :to="'/materias/' + materia.codigo" class="link-materia">
+        <div class="link-materia">
           <h3>{{ materia.nombre }}</h3>
-          <p>{{ materia.codigo }}</p>
-        </router-link>
+          <span class="codigo">{{ materia.codigo }}</span>
+          <p>3 creditos</p>
+        </div>
       </div>
-      <p class="creditos">3 creditos</p>
+      <router-link :to="'/materias/' + materia.codigo" class="link">
+        <font-awesome-icon
+          icon="external-link-alt"
+          class="fas"
+        ></font-awesome-icon>
+      </router-link>
     </div>
     <p class="total-creditos">
       Total de creditos en curso: <span>{{ materias.length * 3 }}</span>
@@ -29,14 +35,19 @@ export default {
     };
   },
   methods: {
-    async getMaterias() {
-      const idUser = firebase.auth().currentUser.uid;
+    getMaterias() {
+      const idUser = firebase.auth().currentUser.uid; //Id del usuario actual
 
       let user;
 
-      await fb.getUsuario(idUser).then((res) => {
-        user = res.data();
+      fb.getUsuario(idUser).then((res) => {
+        user = res.data(); //Se guarda el usuario actual
         user.trimestreActual.forEach((materia) => {
+          /* 
+          Se buscan las materias en la base de datos
+          Se agregan a la lista de materias que usa
+          el componente
+          */
           fb.getMateria(materia).then((res) => {
             this.materias.push(res.data());
           });
@@ -66,13 +77,27 @@ export default {
   margin: 1rem 0;
 }
 
+.datos-materia {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  color: $font;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $acento;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+}
+
 .link-materia {
   color: $font;
   text-decoration: none;
-
-  p {
-    opacity: 0.7;
-  }
 }
 
 .total-creditos {
@@ -81,5 +106,10 @@ export default {
 
 span {
   font-weight: bold;
+}
+
+.codigo {
+  font-weight: unset;
+  opacity: 0.7;
 }
 </style>

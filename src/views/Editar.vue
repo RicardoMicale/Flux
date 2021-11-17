@@ -54,22 +54,30 @@ export default {
   },
   data() {
     return {
-      materias: [],
-      busqueda: [],
-      nombre: "",
-      actuales: [],
+      materias: [], //Toda la materia
+      busqueda: [], //Materias resultado de la busqueda
+      nombre: "", //V-model para la busqueda
+      actuales: [], //Materias inscritas
       user: {},
     };
   },
   methods: {
     async getMaterias() {
+      //Busca todas las materias y las guarda en una lista
       await fb.getAllMaterias().then((res) => {
         this.materias = [...res];
       });
     },
     buscar() {
+      //Se vacia la lista de busqeuda
       this.busqueda = [];
 
+      /*
+      Se itera sobre la lista con todas las materias
+      Se revisa busqueda que se hace usando el v-model
+      Si el nombre de la materia contiene el string de busqueda
+      se muestran los resultados en pantalla 
+      */
       this.materias.forEach((materia) => {
         if (materia.nombre.toLowerCase().includes(this.nombre.toLowerCase())) {
           this.busqueda.push(materia);
@@ -77,8 +85,15 @@ export default {
       });
     },
     async getUser() {
-      const userId = firebase.auth().currentUser.uid;
+      const userId = firebase.auth().currentUser.uid; //Id del usuario actual
 
+      /* 
+      Se busca el usuario actual con cambios a tiempo real
+      Se vacia la lista local de materias inscritas
+      Se itera en la lista del trimestre actual del usuario
+      Se busca la materia de la base de datos como objeto y
+      se agrega a la lista de materias inscritas
+      */
       await fb.getUsuarioDinamico(userId).then((res) => {
         res.onSnapshot((snap) => {
           this.user = snap.data();

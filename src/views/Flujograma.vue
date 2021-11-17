@@ -69,12 +69,14 @@ export default {
   },
   methods: {
     async getMaterias() {
+      //Se buscan todas las materias
       await fb.getAllMaterias().then((res) => {
         this.materias = [...res];
       });
-
+      //Se llama la funcion
       this.pasadasEstudiante();
 
+      //Se convierte cada trimestre en un lista propia
       const trimestre1 = this.filtroMaterias(this.materias, 1);
       const trimestre2 = this.filtroMaterias(this.materias, 2);
       const trimestre3 = this.filtroMaterias(this.materias, 3);
@@ -88,6 +90,7 @@ export default {
       const trimestre11 = this.filtroMaterias(this.materias, 11);
       const trimestre12 = this.filtroMaterias(this.materias, 12);
 
+      //Se crea una lista de objetos con la lista de cada trimestre y su numero (del 1 al 12)
       const flujograma = [
         { materias: trimestre1, id: 1 },
         { materias: trimestre2, id: 2 },
@@ -106,6 +109,7 @@ export default {
       return flujograma;
     },
     filtroMaterias(todasLasMaterias, noTrim) {
+      //Se filtran segun el trimestre al que pertenezcan
       let trimestre = todasLasMaterias.filter((materia) => {
         return materia.trimestre === noTrim;
       });
@@ -113,11 +117,23 @@ export default {
       return trimestre;
     },
     async pasadasEstudiante() {
+      //Si no hay usuario con la sesion iniciada se termina la funcion y no pasa nada
       if (!firebase.auth().currentUser) {
         return;
       }
+      //Id del usuario actual
       const idActual = firebase.auth().currentUser.uid;
 
+      /* 
+      Se busca el usuario con actualizaciones a tiempo real
+      Se itera por la lista de materias
+      Si el usuario la tiene en su lista de materias pasadas
+      se define como 'true' el atributo pasada
+      De lo contrario, se define como 'false' y
+      se revisa si la materia esta en la lista del trimestre en curso
+      De ser asi, se define el atributo enCurso como 'true',
+      de lo contrario, se define como 'false'
+      */
       await fb.getUsuarioDinamico(idActual).then((res) => {
         res.onSnapshot((snap) => {
           this.user = snap.data();

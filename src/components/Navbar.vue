@@ -61,7 +61,13 @@ export default {
     this.loggeado = localStorage.getItem("user") ? true : false;
   },
   methods: {
-    //TODO: mover metodos login a pagina login y dejar router push en metodo login del navbar
+    /* 
+    Se hace el inicio de sesion usando google
+    Si no existe el usuario, se crea el objeto y se guarda en la base de datos
+    Si ya existe solo inicia sesion
+    Se guarda el usuario en local storage para mantener la sesion iniciada
+    Se cambia a la vista de perfil
+    */
     login() {
       let provider = new firebase.auth.GoogleAuthProvider();
       firebase
@@ -87,9 +93,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-      // this.$router.push("/login");
     },
     nuevoUsuario(nombre, email, foto) {
+      //Crea cada usuario como objeto
       const user = {
         nombre: nombre,
         carrera: "Ingenieria de sistemas",
@@ -106,12 +112,11 @@ export default {
       return user;
     },
     logout() {
+      //Se cierra la sesion y manda al usuario al inicio
       firebase
         .auth()
         .signOut()
         .then(() => {
-          console.log("Sesión cerrada.");
-          console.log(firebase.auth().currentUser);
           this.loggeado = !this.loggeado;
           this.$router.push("/");
         });
