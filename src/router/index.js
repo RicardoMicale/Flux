@@ -8,6 +8,7 @@ import Login from '../views/Login.vue';
 import Perfil from '../views/Perfil.vue';
 import NotFound from '../views/NotFound.vue';
 import Discusion from '../views/Discusion.vue';
+import Editar from '../views/Editar.vue';
 
 const routes = [
   {
@@ -51,10 +52,15 @@ const routes = [
     component: Discusion
   },
   {
+    path: '/editar_trimestre',
+    name: 'Editar',
+    component: Editar
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: NotFound
-  }
+  },
 ]
 
 const router = createRouter({

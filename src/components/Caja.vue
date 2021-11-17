@@ -1,20 +1,27 @@
 <template>
   <div class="contenido" :class="pasada || lista ? 'materia-pasada' : ''">
     <router-link :to="'/materias/' + codigo" class="link-materia">
-      <div class="informacion">
+      <div
+        class="informacion"
+        :class="(enCurso || actual) && !(pasada || lista) ? 'en-curso' : ''"
+      >
         <h3>{{ nombre }}</h3>
         <p>{{ codigo }}</p>
       </div>
     </router-link>
     <div class="acciones">
-      <font-awesome-icon icon="eye" class="fas ojo"></font-awesome-icon>
+      <font-awesome-icon
+        icon="eye"
+        class="fas ojo"
+        @click="materiaEnCurso()"
+        :class="(enCurso || actual) && !(pasada || lista) ? 'cursando' : ''"
+      ></font-awesome-icon>
       <font-awesome-icon
         icon="check"
         class="fas check"
         @click="materiaPasada()"
         :class="pasada || lista ? 'pasada' : ''"
       ></font-awesome-icon>
-      <!-- <font-awesome-icon icon="circle" class="fas"></font-awesome-icon> -->
     </div>
   </div>
 </template>
@@ -31,11 +38,12 @@ export default {
     codigo: String,
     nombre: String,
     pasada: Boolean,
+    enCurso: Boolean,
   },
   data() {
     return {
-      usuarioActual: {},
       lista: false,
+      actual: false,
     };
   },
   methods: {
@@ -64,6 +72,29 @@ export default {
 
       this.lista = !this.lista;
     },
+    async materiaEnCurso() {
+      let usuario;
+
+      await fb.getUsuario(firebase.auth().currentUser.uid).then((res) => {
+        usuario = res.data();
+      });
+
+      if (usuario.materiasCursadas.includes(this.codigo)) {
+        alert("Materia pasada! No se pueden ver materias ya pasadas");
+        return;
+      }
+
+      if (usuario.trimestreActual.includes(this.codigo)) {
+        const index = usuario.trimestreActual.indexOf(this.codigo);
+        usuario.trimestreActual.splice(index, 1);
+      } else {
+        usuario.trimestreActual.push(this.codigo);
+      }
+
+      fb.updateUser(firebase.auth().currentUser.uid, usuario);
+
+      this.actual = !this.actual;
+    },
   },
 };
 </script>
@@ -88,6 +119,7 @@ export default {
   padding: 0.5rem;
   box-shadow: 0.4rem 0.4rem 0.8rem rgba(0, 0, 0, 0.5);
   transition: transform 0.2s;
+  transition: all 0.3s;
 
   &:hover {
     // border-color: $acento;
@@ -111,9 +143,15 @@ export default {
   .check:hover {
     color: $check-hover;
   }
+
+  .ojo:hover {
+    color: $ojo-hover;
+  }
 }
 
 .informacion {
+  transition: all 0.2s;
+
   h3 {
     font-size: 1rem;
   }
@@ -128,11 +166,23 @@ export default {
   color: $materia-pasada;
 }
 
+.cursando {
+  color: $materia-actual;
+}
+
+.en-curso {
+  color: $materia-actual;
+}
+
 .materia-pasada {
   opacity: 0.7;
 
   .check:hover {
     color: $materia-pasada;
+  }
+
+  .ojo:hover {
+    color: unset;
   }
 }
 

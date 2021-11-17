@@ -126,6 +126,11 @@ export default {
               materia.pasada = true;
             } else {
               materia.pasada = false;
+              if (this.user.trimestreActual.includes(materia.codigo)) {
+                materia.enCurso = true;
+              } else {
+                materia.enCurso = false;
+              }
             }
           });
         });
