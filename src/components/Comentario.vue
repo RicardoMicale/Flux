@@ -109,6 +109,10 @@ div {
         font-size: 1.3rem;
       }
 
+      .fas {
+        font-size: 1.5rem;
+      }
+
       .twitter:hover {
         color: $twitter;
       }
