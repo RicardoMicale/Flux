@@ -49,9 +49,18 @@ export default {
   methods: {
     async materiaPasada() {
       let usuario;
+      //Se busca el usuario actual
       await fb.getUsuario(firebase.auth().currentUser.uid).then((res) => {
         usuario = res.data();
       });
+
+      /* 
+      Si el codigo de la materia esta en la lista de materias pasadas del usuario
+      se busca su indice, se elimina de la lista y
+      se ajustan los creditos
+      De lo contrario, se agrega el codigo en la lista de materias pasadas y se ajustan los creditos
+      y se actualiza el usuario
+      */
       if (usuario.materiasCursadas.includes(this.codigo)) {
         const index = usuario.materiasCursadas.indexOf(this.codigo);
         usuario.materiasCursadas.splice(index, 1);
@@ -79,6 +88,14 @@ export default {
         usuario = res.data();
       });
 
+      /* 
+      Si la materia ya esta en la lista de pasadas, se muestra un aviso que no se puede agregar y termina la funcion
+      Si el codigo de la materia esta en la lista de materias en curso del usuario
+      se busca su indice, se elimina de la lista y
+      se ajustan los creditos
+      De lo contrario, se agrega el codigo en la lista de materias en curso y se ajustan los creditos
+      y se actualiza el usuario
+      */
       if (usuario.materiasCursadas.includes(this.codigo)) {
         alert("Materia pasada! No se pueden ver materias ya pasadas");
         return;

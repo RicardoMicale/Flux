@@ -36,13 +36,18 @@ export default {
   },
   methods: {
     getMaterias() {
-      const idUser = firebase.auth().currentUser.uid;
+      const idUser = firebase.auth().currentUser.uid; //Id del usuario actual
 
       let user;
 
       fb.getUsuario(idUser).then((res) => {
-        user = res.data();
+        user = res.data(); //Se guarda el usuario actual
         user.trimestreActual.forEach((materia) => {
+          /* 
+          Se buscan las materias en la base de datos
+          Se agregan a la lista de materias que usa
+          el componente
+          */
           fb.getMateria(materia).then((res) => {
             this.materias.push(res.data());
           });
