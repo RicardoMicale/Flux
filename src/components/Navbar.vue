@@ -58,7 +58,7 @@ export default {
     };
   },
   created() {
-    this.loggeado = localStorage.getItem('user') ? true : false;
+    this.loggeado = localStorage.getItem("user") ? true : false;
   },
   methods: {
     //TODO: mover metodos login a pagina login y dejar router push en metodo login del navbar
@@ -82,6 +82,7 @@ export default {
             }
           });
           this.loggeado = !this.loggeado;
+          this.$router.push("/perfil");
         })
         .catch((err) => {
           console.log(err);
@@ -114,7 +115,7 @@ export default {
           this.loggeado = !this.loggeado;
           this.$router.push("/");
         });
-        localStorage.removeItem('user');
+      localStorage.removeItem("user");
     },
   },
 };
