@@ -4,9 +4,7 @@
       <div class="datos-materia">
         <div class="link-materia">
           <h3>{{ materia.nombre }}</h3>
-          <p>
-            <span class="codigo">{{ materia.codigo }}</span>
-          </p>
+          <span class="codigo">{{ materia.codigo }}</span>
           <p>3 creditos</p>
         </div>
       </div>
@@ -37,12 +35,12 @@ export default {
     };
   },
   methods: {
-    async getMaterias() {
+    getMaterias() {
       const idUser = firebase.auth().currentUser.uid;
 
       let user;
 
-      await fb.getUsuario(idUser).then((res) => {
+      fb.getUsuario(idUser).then((res) => {
         user = res.data();
         user.trimestreActual.forEach((materia) => {
           fb.getMateria(materia).then((res) => {
