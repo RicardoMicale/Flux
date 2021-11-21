@@ -17,13 +17,14 @@ import {
 import {
     faTwitter,
     faInstagram,
+    faGithub
   } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(
     faAngleRight, faEye, faCheck, faCircle, faAngleLeft, 
     faExternalLinkAlt, faPlus, faTimes, faEnvelope, 
-    faTwitter, faInstagram, faMinus
+    faTwitter, faInstagram, faMinus, faGithub
     );
 
 createApp(App)
