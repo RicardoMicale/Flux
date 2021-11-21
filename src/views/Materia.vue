@@ -2,6 +2,10 @@
   <div class="contenedor">
     <section class="nombre-materia">
       <div class="info">
+        <router-link to="/flujograma" class="volver">
+        <font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
+        Volver al flujograma
+        </router-link>
         <h2>{{ materia.nombre }}</h2>
         <h4>{{ materia.codigo }}</h4>
         <p>3 creditos</p>
@@ -80,10 +84,6 @@
         </div>
       </div>
     </section>
-    <router-link to="/flujograma" class="volver">
-      <font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
-      Volver al flujograma
-    </router-link>
     <Descripcion
       class="describir"
       v-if="abrirEdicion"
