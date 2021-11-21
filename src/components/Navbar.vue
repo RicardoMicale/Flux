@@ -257,12 +257,21 @@ export default {
     top: 65px;
   }
   @media screen and (max-width: 952px){
-    .logo{
-      font-size: 30px;
-      padding-left: 35px;
-    }
+   
   }
   @media screen and (max-width: 858px){
+  .logo {
+    
+    margin-left: -15%;
+
+  img {
+    width: 2rem;
+    margin-left: 0;
+    padding-left: 0;
+
+  }
+  }
+  
     .navbar{
       height: 65px;
     }

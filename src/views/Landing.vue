@@ -85,9 +85,10 @@ export default {
     color: $bg-secundario;
     opacity: 0.4;
     z-index: -1;
-    margin-bottom: 10rem;
-    left: 5.5rem;
+    margin-bottom: 6rem;
+    left: 2.5rem;
     letter-spacing: -0.4rem;
+    bottom: 0;
     text-align: center;
   }
     .call-to-action {
