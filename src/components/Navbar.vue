@@ -41,7 +41,11 @@
         </button>
       </li>
     </ul>
+    <span class="btn-menu">
+      <font-awesome-icon icon="bars" class="fas fa-bars"></font-awesome-icon>
+    </span>
   </header>
+
 </template>
 
 <script>
@@ -49,6 +53,8 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import * as fb from "../firebase";
+import "../main";
+
 
 export default {
   name: "Navbar",
@@ -237,4 +243,62 @@ export default {
     }
   }
 }
+  .btn-menu{
+    margin-right: 2%;
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+    display: none;
+  }
+  .fa-bars{
+    color: white;
+  }
+  ul.show{
+    top: 65px;
+  }
+  @media screen and (max-width: 952px){
+    .logo{
+      font-size: 30px;
+      padding-left: 35px;
+    }
+  }
+  @media screen and (max-width: 858px){
+    .navbar{
+      height: 65px;
+    }
+    .btn-menu{
+      display: inline-flex;
+    }
+    .navbar-links{
+      position: fixed;
+      width: 100%;
+      height: calc(100%-65px);
+      background-color: $font;
+      top: -100vh;
+      text-align: center;
+      transition: all .4s;
+      flex-direction: column;
+    }
+    .navbar-links  li{
+      margin: 30px 0 0 0;
+      line-height: 30px;
+
+    }
+    .navbar-links li:hover{
+      background: none;
+    }
+    .navbar-links li a{
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+
+    }
+    .navbar-links li a:hover{
+      color: $acento
+    }
+    .logo{
+      font-size: 25px;
+      padding-left: 35px;
+    }
+  }
 </style>
