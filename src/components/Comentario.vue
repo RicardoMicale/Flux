@@ -200,34 +200,6 @@ div {
     margin-bottom: 0.2rem;
     font-size: 1rem;
   }
-
-  .btn-borrar{
-    float: right;
-    background-color: $acento;
-    padding: 0.3rem .5rem;
-    border-radius: 0.4rem;
-    border: none;
-    outline: none;
-    font-family: $fonts;
-    color: $font;
-    font-size: .8rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    // margin: 0.8rem 0;
-
-    &:hover {
-      background-color: $cerrar-popup;
-      color: $input-bg-alt;
-      padding: 0.5rem .5rem;
-      font-size: 1rem;
-    }
-
-    &:active {
-      background-color: $button-press;
-      color: $input-bg-alt;
-    }
-  }
-
 }
 
 .trash {
