@@ -5,19 +5,25 @@
       <h4>Leyenda</h4>
       <p class="item-leyenda">
         <font-awesome-icon icon="check" class="fas"></font-awesome-icon>
-        Marcar como pasada
+        Marcar materia como pasada/ marcar trimestre como pasado
       </p>
       <p class="item-leyenda">
         <font-awesome-icon icon="check" class="fas check"></font-awesome-icon>
         Materia pasada
       </p>
       <p class="item-leyenda">
-        <font-awesome-icon icon="eye" class="fas"></font-awesome-icon> Marcar
-        como en curso
+        <font-awesome-icon icon="eye" class="fas"></font-awesome-icon>
+        Marcar como en curso
       </p>
       <p class="item-leyenda">
         <font-awesome-icon icon="eye" class="fas eye"></font-awesome-icon>
         Materia en curso
+      </p>
+      <p class="item-leyenda">
+        <span class="check-trim">
+          <font-awesome-icon icon="check" class="fas check"></font-awesome-icon>
+        </span>
+        Trimestre pasado
       </p>
     </div>
     <section class="info-carrera">
@@ -211,5 +217,11 @@ h2 {
       color: $materia-actual;
     }
   }
+}
+
+.check-trim {
+  padding: 0.2rem;
+  border-radius: 50%;
+  background-color: $bg-secundario;
 }
 </style>
