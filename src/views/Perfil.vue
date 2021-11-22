@@ -366,8 +366,20 @@ export default {
           p{
             opacity: 1;
           }
+          .identificacion{
+            width: 100%;
+              .nombre{
+                 font-size: 1.2rem;
+               }
+               .carrera{
+                 margin-top: 5%;
+                 font-size: 1rem;
+                 width: 100%;
+               }
+          }
         }
     }
+    
     .separador {
   width: 18rem;
   height: 0.5rem;
