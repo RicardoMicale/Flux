@@ -13,12 +13,13 @@ import {
     faPlus, 
     faTimes,
     faEnvelope,
-    faMinus
+    faMinus,
+    
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faTwitter,
     faInstagram,
-    faGithub
+    faGithub,
   } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
