@@ -126,7 +126,6 @@ export default {
       //Id del usuario actual
       const idActual =
         localStorage.getItem("user") || firebase.auth().currentUser.uid;
-      console.log(idActual);
 
       //Si no hay usuario con la sesion iniciada se termina la funcion y no pasa nada
       if (!idActual) {

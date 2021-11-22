@@ -36,8 +36,17 @@ export default {
   },
   methods: {
     getMaterias() {
+      //Usuario actual existe o es null
+      const usuario =
+        localStorage.getItem("user") || firebase.auth().currentUser;
+
+      if (!usuario) {
+        //si es null se acaba la funcion
+        return;
+      }
+      //Sino, se busca su id
       const idUser =
-        localStorage.getItem("user") || firebase.auth().currentUser.uid; //Id del usuario actual
+        localStorage.getItem("user") || firebase.auth().currentUser.uid;
 
       let user;
 
