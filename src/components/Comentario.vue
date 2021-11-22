@@ -104,10 +104,14 @@ export default {
     },
   },
   mounted() {
-    const user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser || localStorage.getItem("user");
 
     if (user) {
-      this.userId = user.uid;
+      if (typeof user === "string") {
+        this.userId = user;
+      } else {
+        this.userId = user.uid;
+      }
     }
     fb.getUsuario(this.comment.id).then((res) => {
       this.usuario = res.data();
@@ -152,6 +156,7 @@ div {
         color: $font;
         margin: 0 0.3rem;
         font-size: 1.3rem;
+        transition: all 0.3s ease;
       }
 
       .fas {
