@@ -79,7 +79,7 @@ export default {
       Si es falso, aun faltan materias y la variable global trimestreListo queda como false
       */
       const userId =
-        firebase.auth().currentUser.uid || localStorage.getItem("user");
+        localStorage.getItem("user") || firebase.auth().currentUser.uid;
       let todas = false; //Variable que se refiere a todas las materias en el trimestre
 
       await fb.getUsuario(userId).then((res) => {

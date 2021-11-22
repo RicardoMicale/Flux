@@ -51,7 +51,7 @@ export default {
       let usuario;
       //Se busca el usuario actual
       const userId =
-        firebase.auth().currentUser.uid || localStorage.getItem("user");
+        localStorage.getItem("user") || firebase.auth().currentUser.uid;
       await fb.getUsuario(userId).then((res) => {
         usuario = res.data();
       });
@@ -87,7 +87,7 @@ export default {
       let usuario;
 
       const userId =
-        firebase.auth().currentUser.uid || localStorage.getItem("user");
+        localStorage.getItem("user") || firebase.auth().currentUser.uid;
       await fb.getUsuario(userId).then((res) => {
         usuario = res.data();
       });
