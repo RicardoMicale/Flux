@@ -123,12 +123,15 @@ export default {
       return trimestre;
     },
     async pasadasEstudiante() {
+      //Id del usuario actual
+      const idActual =
+        localStorage.getItem("user") || firebase.auth().currentUser.uid;
+      console.log(idActual);
+
       //Si no hay usuario con la sesion iniciada se termina la funcion y no pasa nada
-      if (!firebase.auth().currentUser) {
+      if (!idActual) {
         return;
       }
-      //Id del usuario actual
-      const idActual = firebase.auth().currentUser.uid;
 
       /* 
       Se busca el usuario con actualizaciones a tiempo real
