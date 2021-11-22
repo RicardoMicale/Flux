@@ -52,7 +52,8 @@ export default {
       se agrega a la misma y se actualiza el usuario
       Al final se define que el trimestre esta listo
       */
-      const userId = firebase.auth().currentUser.uid;
+      const userId =
+        firebase.auth().currentUser.uid || localStorage.getItem("user");
 
       fb.getUsuario(userId).then((res) => {
         const usuario = res.data();
@@ -77,7 +78,8 @@ export default {
       Si 'todas' es verdadero, se considera el trimestre como totalmente pasado
       Si es falso, aun faltan materias y la variable global trimestreListo queda como false
       */
-      const userId = firebase.auth().currentUser.uid;
+      const userId =
+        firebase.auth().currentUser.uid || localStorage.getItem("user");
       let todas = false; //Variable que se refiere a todas las materias en el trimestre
 
       await fb.getUsuario(userId).then((res) => {
