@@ -42,6 +42,8 @@
       </div>
     </div>
     <p>{{ comment.comentario }}</p>
+    <button class="btn-borrar" @click="borrar()" 
+    :class="loggeado ? 'esconder' : ''">Borrar</button>
   </div>
   <div v-else>
     Aun no se ha empezado la discusion! Se el primero en comentar esta materia
@@ -62,6 +64,7 @@ export default {
   data() {
     return {
       usuario: {},
+      loggeado: false,
     };
   },
   mounted() {
@@ -69,6 +72,12 @@ export default {
       this.usuario = res.data();
     });
   },
+  //  created() {
+  //   this.loggeado = localStorage.getItem("user") ? true : false;
+  // },
+  methods: {
+
+  }
 };
 </script>
 <style lang='scss' scoped>
@@ -78,10 +87,14 @@ div {
   color: $font;
 }
 
+.esconder{
+  display: none;
+}
+
 .comment-container {
   width: 90%;
   background-color: $bg-secundario;
-  padding: 1.2rem 2rem 2rem;
+  padding: 1.2rem 2rem 2.5rem;
   margin: 0.4rem 0 2rem;
   border-radius: 0.7rem;
 
@@ -143,5 +156,33 @@ div {
     margin-bottom: 0.2rem;
     font-size: 1rem;
   }
+
+  .btn-borrar{
+    float: right;
+    background-color: $acento;
+    padding: 0.3rem .5rem;
+    border-radius: 0.4rem;
+    border: none;
+    outline: none;
+    font-family: $fonts;
+    color: $font;
+    font-size: .8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    // margin: 0.8rem 0;
+
+    &:hover {
+      background-color: $cerrar-popup;
+      color: $input-bg-alt;
+      padding: 0.5rem .5rem;
+      font-size: 1rem;
+    }
+
+    &:active {
+      background-color: $button-press;
+      color: $input-bg-alt;
+    }
+  }
+
 }
 </style>
