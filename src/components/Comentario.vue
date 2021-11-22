@@ -117,6 +117,9 @@ export default {
       this.usuario = res.data();
     });
   },
+  //  created() {
+  //   this.loggeado = localStorage.getItem("user") ? true : false;
+  // },
 };
 </script>
 <style lang='scss' scoped>
@@ -126,10 +129,14 @@ div {
   color: $font;
 }
 
+.esconder{
+  display: none;
+}
+
 .comment-container {
   width: 90%;
   background-color: $bg-secundario;
-  padding: 1.2rem 2rem 2rem;
+  padding: 1.2rem 2rem 2.5rem;
   margin: 0.4rem 0 2rem;
   border-radius: 0.7rem;
   position: relative;

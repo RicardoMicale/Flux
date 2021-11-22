@@ -81,8 +81,8 @@
       </div>
     </section>
     <router-link to="/flujograma" class="volver">
-      <font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
-      Volver al flujograma
+    <font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
+    Volver al flujograma
     </router-link>
     <Descripcion
       class="describir"
