@@ -55,4 +55,53 @@ div {
     }
   }
 }
+@media screen and (max-width: 858px){
+ div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+
+  .mensaje {
+    color: $font;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+
+
+    h2 {
+      font-size: 3.5rem;
+      margin: 1rem 0 ;
+      width: 100%;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      width: 100%;
+    }
+
+    p {
+      margin-bottom: 3rem;
+    }
+
+    .volver {
+      text-decoration: none;
+      color: $font;
+      background-color: $acento;
+      padding: 0.7rem 2rem;
+      border-radius: 0.6rem;
+    }
+  }
+  img{
+    
+    margin: auto;
+    margin-top: 25%;
+    width: 15rem;
+    height: 10rem;
+  }
+}
+
+}
 </style>

@@ -168,4 +168,43 @@ h1 {
     }
   }
 }
+@media screen and (max-width: 858px){
+  .discusion{
+    display: flex;
+    flex-direction: column;
+  }
+  .informacion{
+    width: 100%;
+    h4{
+      opacity: 1;
+    }
+    p{
+      opacity: 1;
+    }
+  }
+  .comment-section{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .add-comment{
+      margin-top: 5%;
+      padding: 0.8rem 1.8rem;
+      width: 80%;
+
+    }
+  }
+  .comentarios{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+  }
+  .comentario{
+      width: 100%;
+      height: 25vh;
+    }
+}
 </style>

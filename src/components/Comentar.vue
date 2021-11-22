@@ -113,4 +113,13 @@ form {
     color: $font;
   }
 }
+@media screen and (max-width: 858px){
+  textarea {
+    resize: none;
+    padding: 0.3rem 2rem;
+    margin: 0.5rem 0 0.6rem;
+    width: 100%;
+    height: 100%;
+  }
+}
 </style>

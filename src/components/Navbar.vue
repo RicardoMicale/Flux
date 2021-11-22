@@ -350,7 +350,7 @@ export default {
     flex-direction: column;
     position: fixed;
     width: 100%;
-    max-width: 100%;
+    max-width: 385px;
     height: 30%;
     top: 0;
     left: 0;
@@ -358,6 +358,7 @@ export default {
     margin-top: 10vh;
     align-items: center;
     border-bottom: $acento 2px solid;
+    opacity: 1;
     
 
     li{
@@ -408,6 +409,7 @@ export default {
     box-shadow: black;
     .navbar{
       padding: 8px 0;
+
 
       .logo{
         img{
