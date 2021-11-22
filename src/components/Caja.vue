@@ -50,7 +50,9 @@ export default {
     async materiaPasada() {
       let usuario;
       //Se busca el usuario actual
-      await fb.getUsuario(firebase.auth().currentUser.uid).then((res) => {
+      const userId =
+        localStorage.getItem("user") || firebase.auth().currentUser.uid;
+      await fb.getUsuario(userId).then((res) => {
         usuario = res.data();
       });
 
@@ -84,7 +86,9 @@ export default {
     async materiaEnCurso() {
       let usuario;
 
-      await fb.getUsuario(firebase.auth().currentUser.uid).then((res) => {
+      const userId =
+        localStorage.getItem("user") || firebase.auth().currentUser.uid;
+      await fb.getUsuario(userId).then((res) => {
         usuario = res.data();
       });
 

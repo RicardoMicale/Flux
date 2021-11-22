@@ -278,7 +278,7 @@ h3 {
 
 .volver {
   margin: 5rem 0 0;
-  font-size: 0.8rem;
+  font-size: 1rem;
   width: fit-content;
 
   &:hover .fas {
@@ -296,7 +296,7 @@ h3 {
 .link-disc {
   text-decoration: none;
   color: $font;
-  font-size: 0.8rem;
+  font-size: 1rem;
 
   .fas {
     margin-left: 0.2rem;

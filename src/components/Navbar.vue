@@ -1,10 +1,11 @@
 <template>
-  <header class="navbar">
+  <header :class="{'scrolled-nav': scrolledNav}">
+    <nav class="navbar">
     <router-link to="/" class="logo">
       <h3>FLUX</h3>
       <img src="../assets/Logo-flux.svg" alt="Logo flux" />
     </router-link>
-    <ul class="navbar-links">
+    <ul v-show="!mobile" class="navbar-links">
       <li><router-link to="/" class="link">Inicio</router-link></li>
       <li>
         <router-link to="/acerca" class="link">Acerca de</router-link>
@@ -41,9 +42,50 @@
         </button>
       </li>
     </ul>
-    <span class="btn-menu">
-      <font-awesome-icon icon="bars" class="fas fa-bars"></font-awesome-icon>
-    </span>
+    <div class="btn-menu">
+      <i @click="toggleMobileNav" v-show="mobile" class="fas fa-bars" :class="{'icon-active': mobileNav}"></i>
+    </div>
+    <transition name="mobile-nav">
+      
+    <ul v-show="mobileNav" class="dropdown-nav">
+      <li><router-link to="/" class="link">Inicio</router-link></li>
+      <li>
+        <router-link to="/acerca" class="link">Acerca de</router-link>
+      </li>
+      <li>
+        <router-link to="/flujograma" class="link"> Flujograma </router-link>
+      </li>
+      <li>
+        <router-link
+          to="/perfil"
+          class="link logged_in"
+          :class="!loggeado ? 'esconder' : ''"
+        >
+          Perfil
+        </router-link>
+      </li>
+      <li>
+        <button
+          class="btn_responsive"
+          @click="login()"
+          :class="loggeado ? 'esconder' : ''"
+        >
+          Iniciar sesión
+        </button>
+      </li>
+      <li>
+        <!-- TODO: Hacer que el boton refresque la página y vaya a inicio -->
+        <button
+          class="btn_responsive"
+          @click="logout()"
+          :class="!loggeado ? 'esconder' : ''"
+        >
+          Cerrar sesión
+        </button>
+      </li>
+    </ul>
+    </transition>
+    </nav>
   </header>
 
 </template>
@@ -60,12 +102,22 @@ export default {
   name: "Navbar",
   data() {
     return {
+      scrolledNav: null,
+      mobile: null,
+      mobileNav: null,
+      windowWith: null,
       loggeado: false,
     };
   },
   created() {
     this.loggeado = localStorage.getItem("user") ? true : false;
+    window.addEventListener('resize', this.checkScreen);
+    this.checkScreen();
   },
+  mounted(){
+    window.addEventListener("scroll", this.updateScroll);
+  },
+
   methods: {
     /* 
     Se hace el inicio de sesion usando google
@@ -74,6 +126,29 @@ export default {
     Se guarda el usuario en local storage para mantener la sesion iniciada
     Se cambia a la vista de perfil
     */
+    updateScroll(){
+      const scrollPosition = window.scrollY;
+      if(scrollPosition > 50){
+        this.scrolledNav = true;
+        return;
+      }
+      this.scrolledNav = false;
+      return;
+
+    },
+    toggleMobileNav(){
+      this.mobileNav = !this.mobileNav;
+    },
+    checkScreen(){
+      this.windowWith = window.innerWidth;
+      if(this.windowWith <= 758){
+        this.mobile= true;
+        return;
+      }
+      this.mobile = false;
+      this.mobileNav = false;
+      return;
+    },
     login() {
       let provider = new firebase.auth.GoogleAuthProvider();
       firebase
@@ -129,6 +204,17 @@ export default {
       localStorage.removeItem("user");
     },
   },
+  
+  /* addEventListener('DOMContentLoaded', () =>{
+    var btn_menu = Document.querySelector('.btn_menu')
+    if(btn_menu){
+      btn_menu.addEventListener('click', () =>{
+        navbar-links.classList.toggle('show')
+
+      })
+
+    }
+  })*/
 };
 </script>
 
@@ -140,7 +226,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 2rem 3rem;
-  height: 8vh;
+  height: 10vh;
   width: 100%;
   position: relative;
 
@@ -244,18 +330,97 @@ export default {
   }
 }
   .btn-menu{
-    margin-right: 2%;
-    font-size: 25px;
-    color: white;
+    display: flex;
+    position: absolute;
+    align-items: center;   
+    right: 24px;
+    height: 100%;
+    i{
+      cursor: pointer;
+      font-size: 24px;
+      transition: .8s ease all;
+      color: white;
+    }
+  }
+  .icon-active{
+    transform: rotate(180deg);
+  }
+  .dropdown-nav{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 100%;
+    max-width: 100%;
+    height: 30%;
+    top: 0;
+    left: 0;
+    background-color: $bg-secundario;
+    margin-top: 10vh;
+    align-items: center;
+    border-bottom: $acento 2px solid;
+    
+
+    li{
+      margin-top: 4%;
+      font-size: 15px;
+      list-style-type: none;
+
+      .link{
+        color: white;
+        font-size: 20px;
+      }
+
+    }
+    .btn_responsive{
+    background-color: $acento;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.4rem;
+    border: none;
+    outline: none;
+    font-family: $fonts;
+    color: $font;
+    font-size: 1rem;
     cursor: pointer;
-    display: none;
+    transition: all 0.2s;
+
+    &:active {
+      background-color: #b63a11;
+      color: #e2e2e2;
+    }
   }
-  .fa-bars{
-    color: white;
+    
+
   }
-  ul.show{
+  .mobile-nav-enter-active,
+  .mobile-nav-leave-active{
+    transition: 1s ease all;
+  }
+  .mobile-nav-enter-from,
+  .mobile-nav-leave-to{
+    transform: translateX(-250px);
+
+  }
+  .mobile-nav-enter-to{
+    transform: translateX(0);
+  }
+  .scrolled-nav{
+    background-color: black;
+    box-shadow: black;
+    .navbar{
+      padding: 8px 0;
+
+      .logo{
+        img{
+          width: 40px;
+          box-shadow: black;
+        }
+      }
+    }
+  }
+ /* ul.show{
     top: 65px;
-  }
+  }*/
+  /*
   @media screen and (max-width: 952px){
    
   }
@@ -280,7 +445,7 @@ export default {
     }
     .navbar-links{
       position: fixed;
-      width: 100%;
+      width: 100vw;
       height: calc(100%-65px);
       background-color: $font;
       top: -100vh;
@@ -310,4 +475,15 @@ export default {
       padding-left: 35px;
     }
   }
+  @media screen and (max-width: 858px) and (orientation: landscape){
+    .navbar-links{
+      overflow: scroll;
+      height: calc(100%-65px);
+    }
+    .navbar-links  li{
+      margin: 5px 0 0 0;
+      line-height: 30px;
+    }
+    
+  }*/
 </style>

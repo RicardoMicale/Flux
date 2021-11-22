@@ -1,7 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
     faAngleRight, 
@@ -13,19 +12,20 @@ import {
     faPlus, 
     faTimes,
     faEnvelope,
-    faMinus
+    faMinus,
+    faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faTwitter,
     faInstagram,
-    faGithub
+    faGithub,
   } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(
     faAngleRight, faEye, faCheck, faCircle, faAngleLeft, 
     faExternalLinkAlt, faPlus, faTimes, faEnvelope, 
-    faTwitter, faInstagram, faMinus,fas,faGithub
+    faTwitter, faInstagram, faMinus, faGithub, faTrash
     );
 
 createApp(App)
