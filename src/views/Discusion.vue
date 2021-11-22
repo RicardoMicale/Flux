@@ -122,6 +122,7 @@ export default {
   p {
     opacity: 0.8;
     margin-bottom: 2rem;
+    width: 90%;
   }
 }
 
