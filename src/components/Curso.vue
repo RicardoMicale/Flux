@@ -37,7 +37,7 @@ export default {
   methods: {
     getMaterias() {
       const idUser =
-        firebase.auth().currentUser.uid || localStorage.getItem("user"); //Id del usuario actual
+        localStorage.getItem("user") || firebase.auth().currentUser.uid; //Id del usuario actual
 
       let user;
 
