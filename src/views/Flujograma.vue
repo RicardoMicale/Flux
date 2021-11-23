@@ -223,5 +223,28 @@ h2 {
   padding: 0.2rem;
   border-radius: 50%;
   background-color: $bg-secundario;
+  
+}
+@media screen and (max-width: 858px){
+ .flujograma{
+    display: flex;
+    flex-direction: column;
+  }
+  .info-carrera{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    margin-left: 10%;
+  
+    p{
+      margin-top: 6%;
+      font-size: 12px;
+    }
+  }/* 
+  .contenedor-materias{
+    width: 200%;
+    background-color: salmon;
+  }*/
 }
 </style>

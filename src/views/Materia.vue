@@ -368,13 +368,16 @@ h3 {
     .materias-prelatorias {
       display: flex;
       flex-direction: column;
-      height: 100%;
-      justify-content: space-between;
-      align-items: flex-start;
+      height: 50%;
       margin-top: 5%;
+
     }
   }
 }
+.link-prela {
+      width: 80%;   
+      font-size: 16px; 
+  }
   h3{
     font-size: 1.8rem;
   }
@@ -399,11 +402,7 @@ h3 {
  
   
   
-  .link-prela {
-    
-    padding: 0.6rem 2.9rem;
-    font-size: 16px; 
-  }
+  
   .creditos-prelatorios{
     display: flex;
     flex-direction: column;

@@ -351,7 +351,8 @@ export default {
     position: fixed;
     width: 100%;
     max-width: 385px;
-    height: 30%;
+    max-height: 50%;
+    height: 400px;
     top: 0;
     left: 0;
     background-color: $bg-secundario;
