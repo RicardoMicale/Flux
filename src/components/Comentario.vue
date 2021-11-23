@@ -202,6 +202,33 @@ div {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .trash {
   position: absolute;
   bottom: 1rem;
