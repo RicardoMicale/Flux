@@ -370,4 +370,49 @@ export default {
     }
   }
 }
+@media screen and (max-width: 858px){
+  .contenido{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .info-estudiante{
+      width: 100%;
+      height: 100%;
+      padding: 0;
+        .info-contacto {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          p{
+            opacity: 1;
+          }
+          .identificacion{
+            width: 100%;
+              .nombre{
+                 font-size: 1.2rem;
+               }
+               .carrera{
+                 margin-top: 5%;
+                 font-size: 1rem;
+                 width: 100%;
+               }
+          }
+        }
+    }
+    
+    .separador {
+  width: 18rem;
+  height: 0.5rem;
+  background-color: $acento;
+  margin-right: 2.5rem;
+  border-radius: 50000px;
+}
+  }
+  .trim-actual{
+    margin-top: 2%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
 </style>

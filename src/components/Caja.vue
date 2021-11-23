@@ -141,7 +141,6 @@ export default {
   box-shadow: 0.4rem 0.4rem 0.8rem rgba(0, 0, 0, 0.5);
   transition: transform 0.2s;
   transition: all 0.3s;
-
   &:hover {
     // border-color: $acento;
     transform: scale(1.05);
@@ -209,5 +208,16 @@ export default {
 
 .clickeable {
   cursor: pointer;
+}
+@media screen and (max-width: 858px){
+ .link-materia{
+    width: 100%;
+    padding-left: -10%;
+  }
+  .contenido{
+    
+    width: 10rem;
+    margin-right: -20%;
+  }
 }
 </style>

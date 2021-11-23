@@ -201,33 +201,33 @@ div {
     font-size: 1rem;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media screen and (max-width: 858px){
+  .header{ 
+    p {
+      opacity: 1;
+    }
+  }
+  .comment-container{
+    width: 100%;
+    padding: 0;
+    height: 100%;
+    .header{
+      width: 100%;
+      height: 40%;
+       .usuario {
+         margin-left: 1%;
+        }
+        .info{
+          margin-left: 6%;
+          text-align: center;
+        }
+        img{
+          justify-content: center;
+          
+        }
+    }
+  }
+ 
 
 .trash {
   position: absolute;
@@ -251,5 +251,6 @@ div {
     color: unset;
     cursor: unset;
   }
+
 }
 </style>

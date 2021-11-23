@@ -187,4 +187,30 @@ export default {
 .inscritas {
   margin-left: 10%;
 }
+@media screen and (max-width: 858px){
+  .editar-view{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  .search{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    .barra{
+      width: 100%;
+      font-size: 15px;
+      input{
+        width: 100%;
+      }
+    }
+    
+    input[type="submit"] {
+ 
+      width: 40%;
+  }
+}
+}
 </style>

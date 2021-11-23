@@ -173,4 +173,25 @@ p {
     color: $font;
   }
 }
+@media screen and (max-width: 858px){
+  .trimestre {
+    display: flex;
+    flex-direction: row;
+    width: 300%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-left: 0;
+    margin-left: 18%;
+    
+  }
+ 
+  .info-trimestre {
+    display: flex;
+    flex-direction: row;
+    p{
+      display: flex;
+      flex-direction: row;
+        }
+  }
+}
 </style>
