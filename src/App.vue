@@ -24,6 +24,7 @@ export default {
 body {
   background-color: $bg-dark;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 #app {

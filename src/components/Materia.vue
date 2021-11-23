@@ -34,7 +34,8 @@ export default {
     inscrita: Boolean,
   },
   data() {
-    const userId = firebase.auth().currentUser.uid;
+    const userId =
+      localStorage.getItem("user") || firebase.auth().currentUser.uid;
     return {
       userId,
       user: {},
