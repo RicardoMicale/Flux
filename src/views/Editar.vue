@@ -85,8 +85,17 @@ export default {
       });
     },
     async getUser() {
-      const userId = firebase.auth().currentUser.uid; //Id del usuario actual
+      //Usuario actual
+      const user = localStorage.getItem("user") || firebase.auth().currentUser;
 
+      if (!user) {
+        //Si no existe se devuelve al usuario anonimo al inicio y se termina la funcion
+        this.$router.push("/");
+        return;
+      }
+      //Se busca el id del usuario actual
+      const userId =
+        localStorage.getItem("user") || firebase.auth().currentUser.uid;
       /* 
       Se busca el usuario actual con cambios a tiempo real
       Se vacia la lista local de materias inscritas

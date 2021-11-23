@@ -134,18 +134,38 @@ export default {
     Si existe, se define el usaurio actual como el que se encontro
     Sino, se devuelve al inicio de la pagina
     */
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        await fb
-          .getUsuario(user.uid)
-          .then((response) => {
-            this.user = response.data();
-          })
-          .catch((err) => console.log(err));
+    const usuario = localStorage.getItem("user") || firebase.auth().currentUser;
+
+    if (!usuario) {
+      this.$router.push("/");
+    } else {
+      /*
+      Si existe el usuario, se busca el objeto en la base de datos
+      */
+
+      if (typeof usuario === "string") {
+        fb.getUsuario(usuario).then((res) => {
+          this.user = res.data();
+        });
       } else {
-        this.$router.push("/");
+        fb.getUsuario(usuario.uid).then((res) => {
+          this.user = res.data();
+        });
       }
-    });
+    }
+
+    // firebase.auth().onAuthStateChanged(async (user) => {
+    //   if (user) {
+    //     await fb
+    //       .getUsuario(user.uid)
+    //       .then((response) => {
+    //         this.user = response.data();
+    //       })
+    //       .catch((err) => console.log(err));
+    //   } else {
+    //     this.$router.push("/");
+    //   }
+    // });
 
     return {
       user,
