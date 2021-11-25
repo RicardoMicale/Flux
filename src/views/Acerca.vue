@@ -67,7 +67,7 @@
                 <a href="https://twitter.com/RicardoMicale" target="_blank">
                   <font-awesome-icon :icon="['fab', 'twitter']" class="fas twitter"></font-awesome-icon>
                 </a>
-                <a href="https://github.com/RicardoMicale/Flux" target="_blank">
+                <a href="https://www.instagram.com/ricardo_micale" target="_blank">
                   <font-awesome-icon :icon="['fab', 'instagram']" class="fas instagram"></font-awesome-icon>
                 </a>
               </div>
