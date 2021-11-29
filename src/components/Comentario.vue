@@ -41,7 +41,7 @@
         </a>
       </div>
     </div>
-    <p>{{ comment.comentario }}</p>
+    <p class="comment">{{ comment.comentario }}</p>
     <font-awesome-icon
       icon="trash"
       class="fas trash"
@@ -202,28 +202,46 @@ div {
   }
 }
 @media screen and (max-width: 858px) {
-  .header {
-    p {
-      opacity: 1;
-    }
-  }
   .comment-container {
     width: 100%;
-    padding: 0;
     height: 100%;
+
     .header {
       width: 100%;
       height: 40%;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
       .usuario {
-        margin-left: 1%;
+        width: 100%;
       }
-      .info {
-        margin-left: 6%;
-        text-align: center;
+
+      .redes {
+        width: 100%;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        a {
+          margin: 1rem 2rem 1.2rem 0;
+        }
+
+        .fas {
+          font-size: 2rem;
+        }
       }
-      img {
-        justify-content: center;
-      }
+
+      // img {
+      //   justify-content: center;
+      // }
+    }
+
+    .comment {
+      font-size: 1.2rem;
+    }
+
+    .trash {
+      font-size: 1.4rem;
     }
   }
 }

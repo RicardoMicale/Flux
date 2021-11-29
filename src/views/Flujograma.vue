@@ -225,28 +225,34 @@ h2 {
   padding: 0.2rem;
   border-radius: 50%;
   background-color: $bg-secundario;
-  
 }
-@media screen and (max-width: 858px){
- .flujograma{
+
+@media screen and (max-width: 858px) {
+  .flujograma {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
-  .info-carrera{
+
+  .leyenda .item-leyenda {
+    margin-bottom: 1rem;
+  }
+
+  .info-carrera {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 90%;
     margin-left: 10%;
-  
-    p{
+
+    p {
       margin-top: 6%;
-      font-size: 12px;
+      font-size: 0.95rem;
     }
-  }/* 
-  .contenedor-materias{
-    width: 200%;
-    background-color: salmon;
-  }*/
+  }
+
+  .contenedor-materias {
+    overflow-x: scroll;
+  }
 }
 </style>

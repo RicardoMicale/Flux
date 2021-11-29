@@ -81,8 +81,8 @@
       </div>
     </section>
     <router-link to="/flujograma" class="volver">
-    <font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
-    Volver al flujograma
+      <font-awesome-icon icon="angle-left" class="fas"></font-awesome-icon>
+      Volver al flujograma
     </router-link>
     <Descripcion
       class="describir"
@@ -339,46 +339,44 @@ h3 {
   margin: 1rem 0;
   width: 90%;
 }
-@media screen and (max-width: 858px){
-.nombre-materia{
-  p {
-    margin: 0.2rem 0;
-    opacity: 1;
+@media screen and (max-width: 858px) {
+  .nombre-materia {
+    p {
+      margin: 0.2rem 0;
+      opacity: 1;
+    }
   }
-  
-}
   .informacion {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     height: 100%;
-  .prelatorias {
-    width: 100%;
-    margin-top: 5%;
-  
-    p {
-      margin: 1rem 0;
-      font-size: 18px;
-    }
-    h4{
-      margin-top: 3%;
-    }
-
-    .materias-prelatorias {
-      display: flex;
-      flex-direction: column;
-      height: 50%;
+    .prelatorias {
+      width: 100%;
       margin-top: 5%;
 
+      p {
+        margin: 1rem 0;
+        font-size: 18px;
+      }
+      h4 {
+        margin-top: 3%;
+      }
+
+      .materias-prelatorias {
+        display: flex;
+        flex-direction: column;
+        height: 50%;
+        margin-top: 5%;
+      }
     }
   }
-}
-.link-prela {
-      width: 80%;   
-      font-size: 16px; 
+  .link-prela {
+    width: 80%;
+    font-size: 16px;
   }
-  h3{
+  h3 {
     font-size: 1.8rem;
   }
   .nombre-materia {
@@ -387,59 +385,56 @@ h3 {
     justify-content: flex-start;
     width: 100%;
     height: 100%;
-    .nombre-grande{
+    .nombre-grande {
       display: none;
     }
-     .info{
-    width: 100%;
-    height: 100%;
-  }
-    h2{
+    .info {
+      width: 100%;
+      height: 100%;
+    }
+    h2 {
       font-size: 1.6rem;
       width: 100%;
     }
   }
- 
-  
-  
-  
-  .creditos-prelatorios{
+
+  .creditos-prelatorios {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
     align-items: flex-start;
-
   }
-    .creditos-prelatorios p{
-      font-size: 15px;
-      width: 100%;
-      height: 5%;
-    }
-  .descripcion{
+  .creditos-prelatorios p {
+    font-size: 15px;
+    width: 100%;
+    height: 5%;
+  }
+  .descripcion {
     width: 100%;
     display: flex;
     flex-direction: column;
     margin: 0;
+
+    .descrip h3 {
+      margin-top: 2rem;
+    }
   }
-  .agg-descrip{
-      padding: 0.8rem 2.9rem;
-    font-size: 16px; 
+  .agg-descrip {
+    padding: 0.8rem 2.9rem;
+    font-size: 16px;
   }
-  .link-disc{
+  .link-disc {
     margin-top: 1rem;
     font-size: 18px;
   }
-  .discusion p{
+  .discusion p {
     margin-top: 1rem;
     font-size: 14px;
   }
-  .volver{
+  .volver {
     font-size: 16px;
     margin-bottom: 2rem;
   }
 }
-
-
-
 </style>

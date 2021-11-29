@@ -25,7 +25,7 @@
       </button>
       <Comentar v-if="agregar" />
       <section class="comentarios">
-        <div class="comentario" v-for="comment in comments" :key="comment.id">
+        <div v-for="comment in comments" :key="comment.id">
           <Comentario :comment="comment" />
         </div>
       </section>
@@ -169,43 +169,37 @@ h1 {
     }
   }
 }
-@media screen and (max-width: 858px){
-  .discusion{
+@media screen and (max-width: 858px) {
+  .discusion {
     display: flex;
     flex-direction: column;
   }
-  .informacion{
+  .informacion {
     width: 100%;
-    h4{
+    h4 {
       opacity: 1;
     }
-    p{
+    p {
       opacity: 1;
     }
   }
-  .comment-section{
+  .comment-section {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    .add-comment{
+    .add-comment {
       margin-top: 5%;
       padding: 0.8rem 1.8rem;
       width: 80%;
-
     }
   }
-  .comentarios{
+  .comentarios {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
   }
-  .comentario{
-      width: 100%;
-      height: 25vh;
-    }
 }
 </style>
