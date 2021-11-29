@@ -209,15 +209,23 @@ export default {
 .clickeable {
   cursor: pointer;
 }
-@media screen and (max-width: 858px){
- .link-materia{
-    width: 100%;
-    padding-left: -10%;
+@media screen and (max-width: 858px) {
+  .link-materia h3 {
+    margin-bottom: 0.5rem;
   }
-  .contenido{
-    
-    width: 10rem;
-    margin-right: -20%;
+  .contenido {
+    width: 15rem;
+    height: 8rem;
+    margin-right: 2rem;
+    padding: 0.8rem;
+
+    .fas {
+      font-size: 1.6rem;
+
+      &:first-of-type {
+        margin-bottom: 1.5rem;
+      }
+    }
   }
 }
 </style>

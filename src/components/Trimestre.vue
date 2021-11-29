@@ -61,6 +61,11 @@ export default {
         this.trimestre.forEach((materia) => {
           if (!usuario.materiasCursadas.includes(materia.codigo)) {
             usuario.materiasCursadas.push(materia.codigo);
+            usuario.creditosTot = usuario.creditosTot + 3;
+            usuario.creditosFaltantes = usuario.creditosFaltantes - 3;
+            if (materia.codigo.includes("BP")) {
+              usuario.creditosBP = usuario.creditosBP + 3;
+            }
             fb.updateUser(userId, usuario);
           }
         });
@@ -173,25 +178,25 @@ p {
     color: $font;
   }
 }
-@media screen and (max-width: 858px){
+@media screen and (max-width: 858px) {
   .trimestre {
     display: flex;
-    flex-direction: row;
-    width: 300%;
+    width: 370%;
     justify-content: space-evenly;
     align-items: center;
     padding-left: 0;
     margin-left: 18%;
-    
   }
- 
+
   .info-trimestre {
-    display: flex;
     flex-direction: row;
-    p{
-      display: flex;
-      flex-direction: row;
-        }
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 2rem 0 0;
+
+    .fas {
+      margin: 0 0 0 1.5rem;
+    }
   }
 }
 </style>
