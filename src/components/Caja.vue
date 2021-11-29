@@ -218,6 +218,14 @@ export default {
     height: 8rem;
     margin-right: 2rem;
     padding: 0.8rem;
+
+    .fas {
+      font-size: 1.6rem;
+
+      &:first-of-type {
+        margin-bottom: 1.5rem;
+      }
+    }
   }
 }
 </style>
