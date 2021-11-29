@@ -61,6 +61,11 @@ export default {
         this.trimestre.forEach((materia) => {
           if (!usuario.materiasCursadas.includes(materia.codigo)) {
             usuario.materiasCursadas.push(materia.codigo);
+            usuario.creditosTot = usuario.creditosTot + 3;
+            usuario.creditosFaltantes = usuario.creditosFaltantes - 3;
+            if (materia.codigo.includes("BP")) {
+              usuario.creditosBP = usuario.creditosBP + 3;
+            }
             fb.updateUser(userId, usuario);
           }
         });
