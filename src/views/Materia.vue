@@ -434,12 +434,13 @@ h3 {
   }
   .volver {
     font-size: 16px;
-    margin-bottom: 2rem;
+    margin: 3rem 0;
   }
 
   .separador {
     width: 100%;
     height: 0.5rem;
+    margin-top: 3rem;
   }
 }
 </style>
