@@ -121,4 +121,18 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 858px) {
+  .modal {
+    width: 80%;
+
+    .fas {
+      font-size: 1.6rem;
+    }
+
+    form {
+      margin: 3rem 1.5rem 2rem 1.5rem;
+    }
+  }
+}
 </style>

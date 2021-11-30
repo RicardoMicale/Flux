@@ -436,5 +436,10 @@ h3 {
     font-size: 16px;
     margin-bottom: 2rem;
   }
+
+  .separador {
+    width: 100%;
+    height: 0.5rem;
+  }
 }
 </style>
