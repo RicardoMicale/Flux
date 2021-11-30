@@ -28,70 +28,66 @@ export default {
   justify-content: center;
   flex-direction: column;
 }
-  p {
-    font-size: 1rem;
-    margin: 5rem 0 0.5rem;
-    letter-spacing: 0.3rem;
-  }
+p {
+  font-size: 1rem;
+  margin: 5rem 0 0.5rem;
+  letter-spacing: 0.3rem;
+}
 
-  .linea {
-    background-color: $acento;
-    height: 5px;
-    width: 10%;
-    border-radius: 5000px;
-  }
+.linea {
+  background-color: $acento;
+  height: 5px;
+  width: 10%;
+  border-radius: 5000px;
+}
 
-  .titulo {
-    font-size: 5em;
-    width: 80%;
-    margin-top: 1.5rem;
-  }
+.titulo {
+  font-size: 5em;
+  width: 80%;
+  margin-top: 1.5rem;
+}
 
-  .call-to-action {
-    background-color: $acento;
-    text-decoration: none;
-    color: $font;
-    padding: 0.8rem 1.5rem;
-    border-radius: 0.5rem;
-    margin-top: 2.5rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.call-to-action {
+  background-color: $acento;
+  text-decoration: none;
+  color: $font;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-    .fas {
-      font-size: 1.5rem;
-      margin-left: 0.5rem;
-    }
+  .fas {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
   }
+}
 
-  h2 {
-    position: absolute;
-    font-size: 20rem;
-    color: $bg-secundario;
-    opacity: 0.4;
-    z-index: -1;
-    bottom: 0;
-    left: 18rem;
-    letter-spacing: -1rem;
-  }
+h2 {
+  position: absolute;
+  font-size: 20rem;
+  color: $bg-secundario;
+  opacity: 0.4;
+  z-index: -1;
+  bottom: 0;
+  left: 18rem;
+  letter-spacing: -1rem;
+}
+
 @media screen and (max-width: 858px) {
-  .titulo{
+  .titulo {
     font-size: 2rem;
     width: 100%;
   }
-  h2{
-    position: absolute;
+  h2 {
     font-size: 6rem;
-    color: $bg-secundario;
-    opacity: 0.4;
-    z-index: -1;
-    margin-bottom: 6rem;
     left: 2.5rem;
     letter-spacing: -0.4rem;
-    bottom: 0;
-    text-align: center;
+    bottom: 15rem;
   }
-    .call-to-action {
+
+  .call-to-action {
     background-color: $acento;
     text-decoration: none;
     color: $font;
@@ -108,7 +104,4 @@ export default {
     }
   }
 }
-  
-
-
 </style>
