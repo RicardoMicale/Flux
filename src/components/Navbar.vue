@@ -1,93 +1,98 @@
 <template>
-  <header :class="{'scrolled-nav': scrolledNav}">
+  <header :class="{ 'scrolled-nav': scrolledNav }">
     <nav class="navbar">
-    <router-link to="/" class="logo">
-      <h3>FLUX</h3>
-      <img src="../assets/Logo-flux.svg" alt="Logo flux" />
-    </router-link>
-    <ul v-show="!mobile" class="navbar-links">
-      <li><router-link to="/" class="link">Inicio</router-link></li>
-      <li>
-        <router-link to="/acerca" class="link">Acerca de</router-link>
-      </li>
-      <li>
-        <router-link to="/flujograma" class="link"> Flujograma </router-link>
-      </li>
-      <li>
-        <router-link
-          to="/perfil"
-          class="link logged_in"
-          :class="!loggeado ? 'esconder' : ''"
-        >
-          Perfil
-        </router-link>
-      </li>
-      <li>
-        <button
-          class="btn_main"
-          @click="login()"
-          :class="loggeado ? 'esconder' : ''"
-        >
-          Iniciar sesión
-        </button>
-      </li>
-      <li>
-        <!-- TODO: Hacer que el boton refresque la página y vaya a inicio -->
-        <button
-          class="btn_main"
-          @click="logout()"
-          :class="!loggeado ? 'esconder' : ''"
-        >
-          Cerrar sesión
-        </button>
-      </li>
-    </ul>
-    <div class="btn-menu">
-      <i @click="toggleMobileNav" v-show="mobile" class="fas fa-bars" :class="{'icon-active': mobileNav}"></i>
-    </div>
-    <transition name="mobile-nav">
-      
-    <ul v-show="mobileNav" class="dropdown-nav">
-      <li><router-link to="/" class="link">Inicio</router-link></li>
-      <li>
-        <router-link to="/acerca" class="link">Acerca de</router-link>
-      </li>
-      <li>
-        <router-link to="/flujograma" class="link"> Flujograma </router-link>
-      </li>
-      <li>
-        <router-link
-          to="/perfil"
-          class="link logged_in"
-          :class="!loggeado ? 'esconder' : ''"
-        >
-          Perfil
-        </router-link>
-      </li>
-      <li>
-        <button
-          class="btn_responsive"
-          @click="login()"
-          :class="loggeado ? 'esconder' : ''"
-        >
-          Iniciar sesión
-        </button>
-      </li>
-      <li>
-        <!-- TODO: Hacer que el boton refresque la página y vaya a inicio -->
-        <button
-          class="btn_responsive"
-          @click="logout()"
-          :class="!loggeado ? 'esconder' : ''"
-        >
-          Cerrar sesión
-        </button>
-      </li>
-    </ul>
-    </transition>
+      <router-link to="/" class="logo">
+        <h3>FLUX</h3>
+        <img src="../assets/Logo-flux.svg" alt="Logo flux" />
+      </router-link>
+      <ul v-show="!mobile" class="navbar-links">
+        <li><router-link to="/" class="link">Inicio</router-link></li>
+        <li>
+          <router-link to="/acerca" class="link">Acerca de</router-link>
+        </li>
+        <li>
+          <router-link to="/flujograma" class="link"> Flujograma </router-link>
+        </li>
+        <li>
+          <router-link
+            to="/perfil"
+            class="link logged_in"
+            :class="!loggeado ? 'esconder' : ''"
+          >
+            Perfil
+          </router-link>
+        </li>
+        <li>
+          <button
+            class="btn_main"
+            @click="login()"
+            :class="loggeado ? 'esconder' : ''"
+          >
+            Iniciar sesión
+          </button>
+        </li>
+        <li>
+          <!-- TODO: Hacer que el boton refresque la página y vaya a inicio -->
+          <button
+            class="btn_main"
+            @click="logout()"
+            :class="!loggeado ? 'esconder' : ''"
+          >
+            Cerrar sesión
+          </button>
+        </li>
+      </ul>
+      <div class="btn-menu">
+        <i
+          @click="toggleMobileNav"
+          v-show="mobile"
+          class="fas fa-bars"
+          :class="{ 'icon-active': mobileNav }"
+        ></i>
+      </div>
+      <transition name="mobile-nav">
+        <ul v-show="mobileNav" class="dropdown-nav">
+          <li><router-link to="/" class="link">Inicio</router-link></li>
+          <li>
+            <router-link to="/acerca" class="link">Acerca de</router-link>
+          </li>
+          <li>
+            <router-link to="/flujograma" class="link">
+              Flujograma
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/perfil"
+              class="link logged_in"
+              :class="!loggeado ? 'esconder' : ''"
+            >
+              Perfil
+            </router-link>
+          </li>
+          <li>
+            <button
+              class="btn_responsive"
+              @click="login()"
+              :class="loggeado ? 'esconder' : ''"
+            >
+              Iniciar sesión
+            </button>
+          </li>
+          <li>
+            <!-- TODO: Hacer que el boton refresque la página y vaya a inicio -->
+            <button
+              class="btn_responsive"
+              @click="logout()"
+              :class="!loggeado ? 'esconder' : ''"
+            >
+              Cerrar sesión
+            </button>
+          </li>
+        </ul>
+      </transition>
     </nav>
   </header>
-
 </template>
 
 <script>
@@ -96,7 +101,6 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import * as fb from "../firebase";
 import "../main";
-
 
 export default {
   name: "Navbar",
@@ -111,10 +115,10 @@ export default {
   },
   created() {
     this.loggeado = localStorage.getItem("user") ? true : false;
-    window.addEventListener('resize', this.checkScreen);
+    window.addEventListener("resize", this.checkScreen);
     this.checkScreen();
   },
-  mounted(){
+  mounted() {
     window.addEventListener("scroll", this.updateScroll);
   },
 
@@ -126,23 +130,22 @@ export default {
     Se guarda el usuario en local storage para mantener la sesion iniciada
     Se cambia a la vista de perfil
     */
-    updateScroll(){
+    updateScroll() {
       const scrollPosition = window.scrollY;
-      if(scrollPosition > 50){
+      if (scrollPosition > 50) {
         this.scrolledNav = true;
         return;
       }
       this.scrolledNav = false;
       return;
-
     },
-    toggleMobileNav(){
+    toggleMobileNav() {
       this.mobileNav = !this.mobileNav;
     },
-    checkScreen(){
+    checkScreen() {
       this.windowWith = window.innerWidth;
-      if(this.windowWith <= 758){
-        this.mobile= true;
+      if (this.windowWith <= 758) {
+        this.mobile = true;
         return;
       }
       this.mobile = false;
@@ -204,7 +207,7 @@ export default {
       localStorage.removeItem("user");
     },
   },
-  
+
   /* addEventListener('DOMContentLoaded', () =>{
     var btn_menu = Document.querySelector('.btn_menu')
     if(btn_menu){
@@ -229,6 +232,7 @@ export default {
   height: 10vh;
   width: 100%;
   position: relative;
+  z-index: 99999;
 
   &::after {
     content: "";
@@ -329,51 +333,49 @@ export default {
     }
   }
 }
-  .btn-menu{
-    display: flex;
-    position: absolute;
-    align-items: center;   
-    right: 24px;
-    height: 100%;
-    i{
-      cursor: pointer;
-      font-size: 24px;
-      transition: .8s ease all;
+.btn-menu {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  right: 24px;
+  height: 100%;
+  i {
+    cursor: pointer;
+    font-size: 24px;
+    transition: 0.8s ease all;
+    color: white;
+  }
+}
+.icon-active {
+  transform: rotate(180deg);
+}
+.dropdown-nav {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  max-width: 385px;
+  max-height: 50%;
+  height: 400px;
+  top: 0;
+  left: 0;
+  background-color: $bg-secundario;
+  margin-top: 10vh;
+  align-items: center;
+  border-bottom: $acento 2px solid;
+  opacity: 1;
+
+  li {
+    margin-top: 4%;
+    font-size: 15px;
+    list-style-type: none;
+
+    .link {
       color: white;
+      font-size: 20px;
     }
   }
-  .icon-active{
-    transform: rotate(180deg);
-  }
-  .dropdown-nav{
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    width: 100%;
-    max-width: 385px;
-    max-height: 50%;
-    height: 400px;
-    top: 0;
-    left: 0;
-    background-color: $bg-secundario;
-    margin-top: 10vh;
-    align-items: center;
-    border-bottom: $acento 2px solid;
-    opacity: 1;
-    
-
-    li{
-      margin-top: 4%;
-      font-size: 15px;
-      list-style-type: none;
-
-      .link{
-        color: white;
-        font-size: 20px;
-      }
-
-    }
-    .btn_responsive{
+  .btn_responsive {
     background-color: $acento;
     padding: 0.5rem 1.5rem;
     border-radius: 0.4rem;
@@ -390,40 +392,36 @@ export default {
       color: #e2e2e2;
     }
   }
-    
+}
+.mobile-nav-enter-active,
+.mobile-nav-leave-active {
+  transition: 1s ease all;
+}
+.mobile-nav-enter-from,
+.mobile-nav-leave-to {
+  transform: translateX(-250px);
+}
+.mobile-nav-enter-to {
+  transform: translateX(0);
+}
+.scrolled-nav {
+  background-color: black;
+  box-shadow: black;
+  .navbar {
+    padding: 8px 0;
 
-  }
-  .mobile-nav-enter-active,
-  .mobile-nav-leave-active{
-    transition: 1s ease all;
-  }
-  .mobile-nav-enter-from,
-  .mobile-nav-leave-to{
-    transform: translateX(-250px);
-
-  }
-  .mobile-nav-enter-to{
-    transform: translateX(0);
-  }
-  .scrolled-nav{
-    background-color: black;
-    box-shadow: black;
-    .navbar{
-      padding: 8px 0;
-
-
-      .logo{
-        img{
-          width: 40px;
-          box-shadow: black;
-        }
+    .logo {
+      img {
+        width: 40px;
+        box-shadow: black;
       }
     }
   }
- /* ul.show{
+}
+/* ul.show{
     top: 65px;
   }*/
-  /*
+/*
   @media screen and (max-width: 952px){
    
   }
